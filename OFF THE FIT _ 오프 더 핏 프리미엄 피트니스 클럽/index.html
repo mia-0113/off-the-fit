@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFF THE FIT | 오프 더 핏 프리미엄 피트니스 클럽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0c0b;
+  --coal:#151311;
+  --coal-2:#1c1916;
+  --stone:#2a2622;
+  --line:rgba(214,186,140,.18);
+  --line-2:rgba(214,186,140,.35);
+  --gold:#d6ba8c;
+  --gold-2:#b8986a;
+  --gold-hi:#f1dfbd;
+  --cream:#f3ece1;
+  --mute:#a39a8c;
+  --mute-2:#6f675c;
+  --serif:'Cormorant Garamond','Noto Serif KR',serif;
+  --serif-kr:'Noto Serif KR',serif;
+  --sans:'Montserrat','Noto Sans KR',sans-serif;
+  --kr:'Noto Sans KR',sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--kr);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* grain */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ───── loader ───── */
+.loader{position:fixed;inset:0;background:var(--ink);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity 1s var(--ease),visibility 1s}
+.loader.done{opacity:0;visibility:hidden}
+.loader .mark{font-family:var(--serif);font-size:44px;letter-spacing:.08em;color:var(--gold-hi);position:relative}
+.loader .mark i{font-style:normal;display:inline-block;opacity:0;transform:translateY(14px);animation:up .9s var(--ease) forwards}
+.loader .bar{width:160px;height:1px;background:var(--line);position:relative;overflow:hidden}
+.loader .bar::after{content:"";position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);animation:load 1.4s var(--ease) .3s forwards}
+.loader small{font-family:var(--sans);font-size:10px;letter-spacing:.5em;color:var(--mute)}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes load{to{transform:none}}
+
+/* ───── nav ───── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:26px 5vw;transition:all .6s var(--ease)}
+.nav.scrolled{padding:16px 5vw;background:rgba(13,12,11,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-mark{width:34px;height:34px;position:relative}
+.logo-mark span{position:absolute;top:2px;bottom:2px;width:7px;background:linear-gradient(180deg,var(--gold-hi),var(--gold-2));transform:skewX(-22deg)}
+.logo-mark span:nth-child(1){left:6px}
+.logo-mark span:nth-child(2){left:17px;opacity:.65}
+.logo-txt{font-family:var(--serif);font-size:20px;letter-spacing:.22em;line-height:1}
+.logo-txt small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:.45em;color:var(--mute);margin-top:5px}
+.menu{display:flex;gap:38px;font-family:var(--sans);font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+.menu a{position:relative;color:var(--cream);opacity:.78;transition:opacity .3s}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--gold);transition:width .4s var(--ease)}
+.menu a:hover{opacity:1}.menu a:hover::after{width:100%}
+.nav-cta{font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;padding:13px 24px;border:1px solid var(--line-2);color:var(--gold-hi);transition:all .4s var(--ease);position:relative;overflow:hidden}
+.nav-cta::before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .5s var(--ease);z-index:-1}
+.nav-cta:hover{color:var(--ink)}.nav-cta:hover::before{transform:none}
+.burger{display:none;width:30px;height:14px;position:relative}
+.burger span{position:absolute;left:0;right:0;height:1px;background:var(--cream)}
+.burger span:first-child{top:0}.burger span:last-child{bottom:0;width:65%}
+
+/* ───── hero ───── */
+.hero{position:relative;height:100vh;min-height:680px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-bg{position:absolute;inset:-6%;background:url(img/1442b03b.jpg) center/cover;animation:kb 22s ease-in-out infinite alternate;filter:blur(16px) brightness(.45) saturate(.9)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09) translate(-1%,1%)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:
+  radial-gradient(ellipse at center,rgba(13,12,11,.15) 0%,rgba(13,12,11,.75) 75%),
+  linear-gradient(180deg,rgba(13,12,11,.6) 0%,transparent 30%,transparent 65%,var(--ink) 100%)}
+.hero-in{position:relative;z-index:2;padding:0 5vw}
+.eyebrow{font-family:var(--sans);font-size:10.5px;letter-spacing:.55em;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:16px}
+.hero .eyebrow{display:flex;justify-content:center}
+.eyebrow::before,.eyebrow::after{content:"";width:40px;height:1px;background:var(--gold-2)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,11vw,168px);line-height:.9;letter-spacing:.02em;margin:34px 0 10px;background:linear-gradient(180deg,#fff7e8 10%,var(--gold) 70%,var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;display:table;margin-left:auto;margin-right:auto}
+.hero h1 .the{font-size:.36em;vertical-align:.95em;letter-spacing:.25em;margin:0 .15em 0 .2em;font-style:italic}
+.hero h1 .slash{position:absolute;left:31%;top:-8%;width:1px;height:118%;background:linear-gradient(180deg,transparent,var(--gold-hi),transparent);transform:rotate(28deg);transform-origin:center}
+.hero .kr{font-family:var(--serif-kr);font-size:15px;letter-spacing:.9em;color:var(--gold-hi);opacity:.9;margin-left:.9em}
+.hero .club{font-family:var(--sans);font-size:12px;letter-spacing:.6em;color:var(--mute);margin-top:22px}
+.hero .quote{font-family:var(--serif-kr);font-weight:300;font-size:clamp(17px,1.7vw,22px);color:var(--cream);margin-top:44px;letter-spacing:.05em}
+.hero .quote b{font-weight:400;color:var(--gold-hi)}
+.hero-side{position:absolute;z-index:2;bottom:48px;font-family:var(--sans);font-size:10px;letter-spacing:.35em;color:var(--mute)}
+.hero-side.l{left:5vw}.hero-side.r{right:5vw;text-align:right}
+.hero-side em{display:block;font-style:normal;color:var(--gold);font-size:11px;margin-bottom:6px}
+.scroll{position:absolute;z-index:2;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;font-family:var(--sans);font-size:9px;letter-spacing:.45em;color:var(--mute)}
+.scroll i{width:1px;height:56px;background:var(--line);position:relative;overflow:hidden}
+.scroll i::after{content:"";position:absolute;left:0;width:1px;height:40%;background:var(--gold);animation:drip 2.2s var(--ease) infinite}
+@keyframes drip{from{top:-40%}to{top:100%}}
+.hero .reveal-h{opacity:0;transform:translateY(30px);transition:all 1.4s var(--ease)}
+.ready .hero .reveal-h{opacity:1;transform:none}
+.ready .hero .d1{transition-delay:.2s}.ready .hero .d2{transition-delay:.45s}.ready .hero .d3{transition-delay:.7s}.ready .hero .d4{transition-delay:.95s}
+
+/* ───── marquee ───── */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--coal)}
+.marquee-track{display:flex;gap:60px;width:max-content;animation:mq 40s linear infinite}
+.marquee span{font-family:var(--serif);font-size:24px;letter-spacing:.12em;white-space:nowrap;color:var(--cream);display:flex;align-items:center;gap:60px}
+.marquee span i{font-style:normal;color:var(--gold);font-size:12px}
+.marquee span em{font-style:italic;color:var(--gold-hi)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ───── common ───── */
+section{position:relative}
+.wrap{max-width:1320px;margin:0 auto;padding:0 5vw}
+.pad{padding:150px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:80px;flex-wrap:wrap}
+.sec-no{font-family:var(--sans);font-size:11px;letter-spacing:.4em;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.sec-no::after{content:"";width:60px;height:1px;background:var(--gold-2)}
+.h2{font-family:var(--serif);font-weight:300;font-size:clamp(44px,5.6vw,84px);line-height:1;letter-spacing:.01em}
+.h2 em{font-style:italic;color:var(--gold)}
+.h2-kr{font-family:var(--serif-kr);font-size:15px;color:var(--mute);letter-spacing:.3em;margin-top:18px;font-weight:300}
+.lead{max-width:440px;color:var(--mute);font-size:14.5px;line-height:2}
+.reveal{opacity:0;transform:translateY(46px);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}.reveal.d4{transition-delay:.48s}
+
+/* ───── philosophy ───── */
+.philo{background:var(--ink)}
+.philo-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:100px;align-items:center}
+.philo-img{position:relative;aspect-ratio:4/5;overflow:hidden}
+.philo-img img{width:100%;height:100%;object-fit:cover;object-position:30% center;transform:scale(1.15);transition:transform 2.2s var(--ease)}
+.philo-img.in img{transform:scale(1)}
+.philo-img::after{content:"";position:absolute;inset:18px;border:1px solid rgba(241,223,189,.28);pointer-events:none}
+.philo-tag{position:absolute;right:-30px;bottom:60px;background:var(--gold);color:var(--ink);padding:26px 30px;font-family:var(--serif);z-index:2;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.philo-tag b{display:block;font-size:46px;font-weight:500;line-height:1}
+.philo-tag small{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;font-weight:600}
+.big-quote{font-family:var(--serif-kr);font-weight:300;font-size:clamp(28px,3vw,42px);line-height:1.55;letter-spacing:-.01em;margin:10px 0 36px}
+.big-quote .q{font-family:var(--serif);font-size:1.8em;color:var(--gold);line-height:0;vertical-align:-.35em;margin-right:6px}
+.big-quote b{font-weight:500;background:linear-gradient(transparent 62%,rgba(214,186,140,.28) 62%)}
+.philo p{color:var(--mute);font-size:14.5px;line-height:2.1;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:54px}
+.stat{padding:30px 0 0;border-right:1px solid var(--line);padding-left:20px}
+.stat:first-child{padding-left:0}.stat:last-child{border-right:0}
+.stat b{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1;color:var(--gold-hi);display:block}
+.stat b sup{font-size:.4em;color:var(--gold);margin-left:3px;vertical-align:1.4em}
+.stat small{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--mute);display:block;margin-top:12px}
+
+/* ───── floors ───── */
+.floors{background:var(--coal);overflow:hidden}
+.floors::before{content:"FLOORS";position:absolute;right:-2vw;top:60px;font-family:var(--serif);font-size:22vw;line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(214,186,140,.06);pointer-events:none;letter-spacing:-.02em}
+.floor-ui{display:grid;grid-template-columns:240px 1fr;gap:60px;position:relative}
+.floor-tabs{display:flex;flex-direction:column;border-left:1px solid var(--line)}
+.ftab{text-align:left;padding:24px 0 24px 30px;position:relative;transition:all .5s var(--ease);opacity:.45}
+.ftab::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .6s var(--ease)}
+.ftab.on{opacity:1}.ftab.on::before{transform:none}
+.ftab:hover{opacity:.85}
+.ftab b{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1;display:block;letter-spacing:.02em}
+.ftab.on b{color:var(--gold-hi)}
+.ftab small{font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--mute);display:block;margin-top:8px}
+.floor-stage{position:relative;min-height:640px}
+.fpanel{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s var(--ease),visibility .9s}
+.fpanel.on{opacity:1;visibility:visible;position:relative}
+.fimg{position:relative;aspect-ratio:16/8.4;overflow:hidden;clip-path:inset(0 100% 0 0);transition:clip-path 1.3s var(--ease)}
+.fpanel.on .fimg{clip-path:inset(0 0 0 0)}
+.fimg img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 2.4s var(--ease)}
+.fpanel.on .fimg img{transform:scale(1)}
+.fimg .fl-badge{position:absolute;top:24px;left:24px;background:rgba(13,12,11,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line-2);padding:10px 18px;font-family:var(--sans);font-size:10px;letter-spacing:.35em;color:var(--gold-hi)}
+.finfo{display:grid;grid-template-columns:1fr 1.25fr;gap:60px;margin-top:46px}
+.finfo h3{font-family:var(--serif);font-weight:300;font-size:44px;line-height:1.05}
+.finfo h3 em{font-style:italic;color:var(--gold)}
+.finfo .kr-t{font-family:var(--serif-kr);font-size:16px;color:var(--gold-hi);margin:12px 0 18px;letter-spacing:.06em}
+.finfo p{color:var(--mute);font-size:14px;line-height:2}
+.flist{list-style:none;border-top:1px solid var(--line)}
+.flist li{display:flex;align-items:baseline;gap:20px;padding:17px 0;border-bottom:1px solid var(--line);font-size:14.5px;transition:padding .4s var(--ease)}
+.flist li:hover{padding-left:10px}
+.flist li span{font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--gold);min-width:28px}
+.flist li em{font-style:normal;margin-left:auto;font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--mute-2)}
+
+/* ───── programs ───── */
+.programs{background:var(--ink)}
+.prog-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}
+.prog{padding:50px 34px 44px;border-right:1px solid var(--line);position:relative;overflow:hidden;min-height:470px;display:flex;flex-direction:column;transition:background .6s var(--ease)}
+.prog:last-child{border-right:0}
+.prog::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(214,186,140,.12),transparent 60%);opacity:0;transition:opacity .6s var(--ease)}
+.prog:hover::before{opacity:1}
+.prog .num{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--gold)}
+.prog .ico{width:46px;height:46px;margin:34px 0 30px;color:var(--gold-hi);transition:transform .7s var(--ease)}
+.prog:hover .ico{transform:translateY(-6px) rotate(-6deg)}
+.prog h4{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1}
+.prog h5{font-family:var(--serif-kr);font-weight:400;font-size:14px;color:var(--gold-hi);margin:8px 0 20px;letter-spacing:.08em}
+.prog p{font-size:13.5px;color:var(--mute);line-height:1.95;flex:1}
+.prog .more{margin-top:28px;font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--gold);display:flex;align-items:center;gap:12px}
+.prog .more::after{content:"";height:1px;width:24px;background:var(--gold);transition:width .5s var(--ease)}
+.prog:hover .more::after{width:56px}
+.prog.feat{background:linear-gradient(160deg,#2a231a,#16130f)}
+.prog.feat .tag{position:absolute;top:26px;right:-38px;transform:rotate(45deg);background:var(--gold);color:var(--ink);font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.25em;padding:6px 44px}
+
+/* ───── trainer system ───── */
+.system{background:linear-gradient(180deg,var(--coal),var(--ink))}
+.sys-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.consent{position:relative;aspect-ratio:1;max-width:520px;margin:0 auto;width:100%}
+.consent svg{width:100%;height:100%;overflow:visible}
+.consent .node{position:absolute;width:150px;text-align:center;transform:translate(-50%,-50%)}
+.consent .node .c{width:112px;height:112px;border-radius:50%;margin:0 auto 14px;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle at 30% 25%,#2d2720,#141210);box-shadow:0 0 0 8px rgba(214,186,140,.04),0 20px 40px rgba(0,0,0,.5);transition:all .6s var(--ease)}
+.consent .node:hover .c{border-color:var(--gold);box-shadow:0 0 0 10px rgba(214,186,140,.08),0 0 40px rgba(214,186,140,.25)}
+.consent .node .c b{font-family:var(--serif);font-size:30px;color:var(--gold-hi);font-weight:400;line-height:1}
+.consent .node .c small{font-family:var(--sans);font-size:8.5px;letter-spacing:.25em;color:var(--mute);margin-top:6px}
+.consent .node span{font-size:13px;color:var(--cream);letter-spacing:.06em}
+.consent .center{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);text-align:center}
+.consent .center b{font-family:var(--serif);font-size:58px;font-weight:300;color:var(--gold);line-height:1;display:block}
+.consent .center small{font-family:var(--sans);font-size:9px;letter-spacing:.35em;color:var(--mute)}
+.dash{stroke-dasharray:4 6;animation:dash 18s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-300}}
+.sys-list{margin-top:44px}
+.sys-item{display:grid;grid-template-columns:60px 1fr;gap:10px;padding:26px 0;border-top:1px solid var(--line)}
+.sys-item:last-child{border-bottom:1px solid var(--line)}
+.sys-item i{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--gold);line-height:1.2}
+.sys-item h6{font-family:var(--serif-kr);font-weight:500;font-size:17px;margin-bottom:8px;letter-spacing:.02em}
+.sys-item p{font-size:13.5px;color:var(--mute);line-height:1.95}
+.leader{margin-top:30px;padding:26px 28px;border:1px solid var(--line);background:rgba(214,186,140,.03);position:relative}
+.leader-h{display:flex;justify-content:space-between;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--mute);margin-bottom:18px}
+.leader-h b{color:var(--gold);font-weight:500}
+.lrow{display:grid;grid-template-columns:36px 90px 1fr 40px;align-items:center;gap:12px;font-size:12.5px;margin:11px 0}
+.lrow i{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:16px}
+.lrow .bar{height:4px;background:rgba(214,186,140,.1);position:relative;overflow:hidden}
+.lrow .bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:linear-gradient(90deg,var(--gold-2),var(--gold-hi));transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ease)}
+.leader.in .lrow .bar::after{transform:scaleX(1)}
+.lrow em{font-style:normal;font-family:var(--sans);font-size:11px;color:var(--mute);text-align:right}
+.lrow .blur{filter:blur(4px);user-select:none}
+
+/* ───── code (rules) ───── */
+.code{background:var(--ink)}
+.code-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:100px}
+.code-side{position:sticky;top:130px;align-self:start}
+.code-side .stamp{margin-top:50px;width:170px;height:170px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;position:relative;animation:spin 30s linear infinite}
+.code-side .stamp svg{position:absolute;inset:0}
+.code-side .stamp b{font-family:var(--serif);font-size:42px;color:var(--gold);animation:spin 30s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rule{border-top:1px solid var(--line)}
+.rule:last-child{border-bottom:1px solid var(--line)}
+.rule-h{width:100%;display:grid;grid-template-columns:70px 1fr 40px;align-items:center;padding:30px 0;text-align:left;transition:padding .5s var(--ease)}
+.rule-h:hover{padding-left:12px}
+.rule-h .n{font-family:var(--serif);font-size:30px;color:var(--gold);font-weight:300}
+.rule-h .t{font-family:var(--serif-kr);font-size:20px;font-weight:400;letter-spacing:.02em}
+.rule-h .t small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.32em;color:var(--mute);margin-top:6px;font-weight:400}
+.rule-h .pm{width:28px;height:28px;border:1px solid var(--line-2);border-radius:50%;position:relative;justify-self:end;transition:all .5s var(--ease)}
+.rule-h .pm::before,.rule-h .pm::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1px;background:var(--gold);transform:translate(-50%,-50%);transition:transform .5s var(--ease)}
+.rule-h .pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+.rule.open .pm{background:var(--gold)}
+.rule.open .pm::before,.rule.open .pm::after{background:var(--ink)}
+.rule.open .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.rule-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s var(--ease)}
+.rule.open .rule-b{grid-template-rows:1fr}
+.rule-b>div{overflow:hidden}
+.rule-b p{padding:0 40px 34px 70px;color:var(--mute);font-size:14px;line-height:2.05}
+.rule-b p b{color:var(--gold-hi);font-weight:400}
+.rule-b .note{display:inline-block;margin-top:12px;font-size:12px;padding:6px 14px;border:1px solid var(--line);color:var(--gold);letter-spacing:.04em}
+
+/* ───── community ───── */
+.comm{background:var(--coal);overflow:hidden}
+.comm-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.phone{width:330px;margin:0 auto;border-radius:46px;padding:12px;background:linear-gradient(145deg,#3a332b,#121010);box-shadow:0 60px 120px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.08);position:relative;transform:rotate(-4deg);transition:transform 1s var(--ease)}
+.phone:hover{transform:rotate(0)}
+.phone::before{content:"";position:absolute;inset:-80px;background:radial-gradient(circle,rgba(214,186,140,.18),transparent 60%);z-index:-1}
+.screen{border-radius:36px;background:#0f0e0d;overflow:hidden;height:640px;position:relative}
+.notch{width:110px;height:28px;background:#000;border-radius:20px;margin:10px auto 0}
+.app-h{padding:16px 20px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.app-h b{font-family:var(--serif);font-size:18px;letter-spacing:.1em;color:var(--gold-hi);font-weight:400}
+.app-h small{font-family:var(--sans);font-size:8px;letter-spacing:.2em;color:var(--mute);display:block}
+.app-h .dot{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-2))}
+.chips{display:flex;gap:6px;padding:12px 16px;overflow:hidden}
+.chips span{font-size:10.5px;padding:5px 11px;border-radius:20px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.chips span.on{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:500}
+.feed{padding:4px 14px;height:500px;overflow:hidden;position:relative}
+.feed::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,#0f0e0d)}
+.feed-track{animation:feed 26s linear infinite}
+@keyframes feed{to{transform:translateY(-50%)}}
+.post{background:#191714;border:1px solid rgba(214,186,140,.1);border-radius:14px;padding:14px;margin-bottom:10px}
+.post-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.post-h .av{width:22px;height:22px;border-radius:50%;background:#2a2622;display:flex;align-items:center;justify-content:center;font-size:10px}
+.post-h b{font-size:11px;font-weight:500;color:var(--cream)}
+.post-h em{font-style:normal;font-size:9.5px;color:var(--mute-2);margin-left:auto}
+.post .cat{font-size:9px;color:var(--gold);letter-spacing:.1em;margin-bottom:4px;display:block}
+.post p{font-size:12px;line-height:1.65;color:#d9d1c4}
+.post .meta{display:flex;gap:14px;margin-top:9px;font-size:10px;color:var(--mute-2)}
+.post.hot{border-color:rgba(214,186,140,.4);background:linear-gradient(160deg,#241e17,#191714)}
+.feat-list{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.feat-list div{background:var(--coal);padding:26px 24px}
+.feat-list b{font-family:var(--serif);font-weight:400;font-size:22px;display:block;color:var(--gold-hi)}
+.feat-list span{font-size:12.5px;color:var(--mute)}
+
+/* ───── gallery strip ───── */
+.strip{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:8px;padding:0 8px;background:var(--ink)}
+.strip figure{position:relative;overflow:hidden;cursor:pointer}
+.strip figure:first-child{grid-row:span 2}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease),filter 1s}
+.strip figure:hover img{transform:scale(1.06);filter:brightness(.7)}
+.strip figcaption{position:absolute;left:24px;bottom:22px;font-family:var(--sans);font-size:10px;letter-spacing:.35em;color:var(--cream);opacity:0;transform:translateY(10px);transition:all .6s var(--ease)}
+.strip figcaption b{display:block;font-family:var(--serif);font-size:28px;letter-spacing:.04em;font-weight:400;color:var(--gold-hi)}
+.strip figure:hover figcaption{opacity:1;transform:none}
+
+/* ───── hours / location ───── */
+.visit{background:var(--ink)}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line)}
+.vbox{padding:54px 42px;border-right:1px solid var(--line)}
+.vbox:last-child{border-right:0}
+.vbox .lb{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--gold);margin-bottom:26px;display:block}
+.vbox .clock{font-family:var(--serif);font-weight:300;font-size:58px;line-height:1;color:var(--gold-hi)}
+.vbox .clock span{color:var(--mute-2);font-size:.6em;margin:0 .2em}
+.vbox .sub{font-size:13px;color:var(--mute);margin-top:14px;line-height:1.9}
+.now{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-family:var(--sans);font-size:10px;letter-spacing:.25em;padding:8px 14px;border:1px solid var(--line)}
+.now i{width:7px;height:7px;border-radius:50%;background:#7fc28b;box-shadow:0 0 0 0 rgba(127,194,139,.6);animation:pulse 2s infinite}
+.now.closed i{background:#c27f7f;animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(127,194,139,0)}100%{box-shadow:0 0 0 0 rgba(127,194,139,0)}}
+.addr{font-family:var(--serif-kr);font-size:22px;line-height:1.6;font-weight:300}
+.addr small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.3em;color:var(--mute);margin-top:10px}
+.map{margin-top:26px;height:130px;border:1px solid var(--line);position:relative;overflow:hidden;background:
+  linear-gradient(90deg,rgba(214,186,140,.05) 1px,transparent 1px) 0 0/22px 22px,
+  linear-gradient(rgba(214,186,140,.05) 1px,transparent 1px) 0 0/22px 22px,#12100e}
+.map::before{content:"";position:absolute;left:-10%;right:-10%;top:58%;height:10px;background:rgba(214,186,140,.12);transform:rotate(-8deg)}
+.map::after{content:"";position:absolute;top:-10%;bottom:-10%;left:38%;width:8px;background:rgba(214,186,140,.09);transform:rotate(12deg)}
+.pin{position:absolute;left:52%;top:40%;z-index:2}
+.pin i{display:block;width:14px;height:14px;background:var(--gold);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 6px rgba(214,186,140,.18),0 0 0 14px rgba(214,186,140,.06)}
+.pin b{position:absolute;left:24px;top:-4px;font-family:var(--sans);font-size:9px;letter-spacing:.25em;white-space:nowrap;color:var(--gold-hi)}
+.tlist{list-style:none}
+.tlist li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.tlist li span{color:var(--mute)}
+.tlist li b{font-weight:400;font-family:var(--sans);font-size:12.5px;letter-spacing:.06em;color:var(--cream)}
+
+/* ───── inquiry ───── */
+.inq{position:relative;overflow:hidden;padding:160px 0}
+.inq-bg{position:absolute;inset:0;background:url(img/3bbbb6d1.jpg) center/cover;filter:brightness(.28) saturate(.8);transform:scale(1.1)}
+.inq::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(13,12,11,.7) 50%,rgba(13,12,11,.4));z-index:1}
+.inq .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.form{background:rgba(21,19,17,.72);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--line-2);padding:50px 46px;position:relative}
+.form::before{content:"";position:absolute;top:-1px;left:46px;right:46px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-hi),transparent)}
+.form h4{font-family:var(--serif);font-weight:400;font-size:30px;margin-bottom:6px}
+.form h4+small{font-size:12px;color:var(--mute);display:block;margin-bottom:30px}
+.field{position:relative;margin-bottom:22px}
+.field input,.field select,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);padding:22px 0 10px;color:var(--cream);font:inherit;font-size:14px;outline:none;transition:border-color .4s;-webkit-appearance:none;appearance:none;border-radius:0}
+.field select option{background:var(--coal)}
+.field textarea{resize:none;height:70px}
+.field label{position:absolute;left:0;top:22px;font-size:13px;color:var(--mute);pointer-events:none;transition:all .4s var(--ease)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label,.field.sel label{top:0;font-size:10px;letter-spacing:.2em;color:var(--gold)}
+.pick{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 26px}
+.pick label{cursor:pointer}
+.pick input{display:none}
+.pick span{display:inline-block;padding:9px 16px;border:1px solid var(--line-2);font-size:12px;transition:all .35s var(--ease)}
+.pick input:checked+span{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.pick-l{font-size:10px;letter-spacing:.2em;color:var(--gold);display:block}
+.btn{width:100%;padding:20px;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 50%,var(--gold-2));color:var(--ink);font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.4em;position:relative;overflow:hidden;transition:letter-spacing .5s var(--ease)}
+.btn:hover{letter-spacing:.5em}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .9s var(--ease)}
+.btn:hover::after{left:130%}
+.privacy{font-size:11px;color:var(--mute-2);margin-top:16px;text-align:center}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:40px;transform:translate(-50%,40px);opacity:0;visibility:hidden;z-index:200;background:var(--coal-2);border:1px solid var(--gold);padding:20px 30px;display:flex;align-items:center;gap:16px;transition:all .7s var(--ease);box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.toast i{width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:14px}
+.toast b{font-weight:500;font-size:14px;display:block}
+.toast small{font-size:12px;color:var(--mute)}
+
+/* ───── footer ───── */
+footer{background:#090807;border-top:1px solid var(--line);padding:90px 0 40px}
+.f-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;padding-bottom:70px;border-bottom:1px solid var(--line)}
+.f-brand .logo-txt{font-size:28px}
+.f-brand p{margin-top:24px;font-family:var(--serif-kr);font-size:15px;color:var(--gold-hi);font-weight:300}
+.f-col h6{font-family:var(--sans);font-size:10px;letter-spacing:.35em;color:var(--gold);margin-bottom:22px;font-weight:500}
+.f-col a,.f-col span{display:block;font-size:13px;color:var(--mute);margin-bottom:10px;transition:color .3s}
+.f-col a:hover{color:var(--cream)}
+.f-big{white-space:nowrap;font-family:var(--serif);font-weight:300;font-size:clamp(48px,12vw,190px);line-height:.85;text-align:center;margin:60px 0 30px;letter-spacing:.02em;color:transparent;-webkit-text-stroke:1px rgba(214,186,140,.25);user-select:none}
+.f-bot{display:flex;justify-content:space-between;font-family:var(--sans);font-size:10px;letter-spacing:.25em;color:var(--mute-2);flex-wrap:wrap;gap:12px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(9,8,7,.94);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .6s var(--ease);padding:5vw;cursor:zoom-out}
+.lb.on{opacity:1;visibility:visible}
+.lb img{max-height:86vh;border:1px solid var(--line);transform:scale(.95);transition:transform .8s var(--ease)}
+.lb.on img{transform:none}
+
+/* cursor glow */
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(214,186,140,.07),transparent 65%);transform:translate(-50%,-50%);transition:opacity .4s;mix-blend-mode:screen}
+
+/* ───── responsive ───── */
+@media(max-width:1080px){
+  .menu{display:none}.burger{display:block}.nav-cta{display:none}
+  .philo-grid,.sys-grid,.comm-grid,.code-grid,.inq .wrap{grid-template-columns:1fr;gap:60px}
+  .philo-tag{right:20px}
+  .floor-ui{grid-template-columns:1fr;gap:30px}
+  .floor-tabs{flex-direction:row;border-left:0;border-bottom:1px solid var(--line);overflow-x:auto}
+  .ftab{padding:16px 20px}.ftab::before{left:0;right:0;top:auto;bottom:-1px;width:auto;height:2px;transform:scaleX(0)}
+  .ftab b{font-size:32px}
+  .finfo{grid-template-columns:1fr;gap:30px}
+  .prog-grid{grid-template-columns:1fr 1fr}.prog:nth-child(2){border-right:0}.prog:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .visit-grid{grid-template-columns:1fr}.vbox{border-right:0;border-bottom:1px solid var(--line)}
+  .f-top{grid-template-columns:1fr 1fr}
+  .code-side{position:static}
+  .strip{grid-template-columns:1fr 1fr;grid-template-rows:240px 200px 200px}.strip figure:first-child{grid-column:span 2;grid-row:auto}
+}
+@media(max-width:640px){
+  .pad{padding:100px 0}
+  .prog-grid{grid-template-columns:1fr}.prog{border-right:0!important;border-bottom:1px solid var(--line);min-height:auto}
+  .stats{grid-template-columns:1fr 1fr}.stat{padding:24px 0 24px 16px!important;border-bottom:1px solid var(--line)}
+  .stat:nth-child(2n){border-right:0}
+  .hero-side{display:none}
+  .rule-b p{padding:0 10px 30px 0}
+  .rule-h{grid-template-columns:50px 1fr 36px}
+  .feat-list{grid-template-columns:1fr}
+  .form{padding:40px 26px}
+  .phone{width:290px}.screen{height:580px}
+  .f-top{grid-template-columns:1fr}
+}
+
+/* mobile menu */
+.mnav{position:fixed;inset:0;background:var(--ink);z-index:150;display:flex;flex-direction:column;justify-content:center;padding:0 10vw;gap:10px;clip-path:circle(0 at calc(100% - 40px) 40px);transition:clip-path .9s var(--ease)}
+.mnav.on{clip-path:circle(150% at calc(100% - 40px) 40px)}
+.mnav a{font-family:var(--serif);font-size:46px;font-weight:300;line-height:1.3}
+.mnav a small{font-family:var(--kr);font-size:12px;color:var(--gold);margin-left:14px;letter-spacing:.1em}
+.mnav .x{position:absolute;top:28px;right:5vw;font-family:var(--sans);font-size:11px;letter-spacing:.3em;color:var(--gold)}
+
+/* ═════ MULTI-PAGE LAYER ═════ */
+.page{display:none}
+.page.on{display:block;animation:pgIn 1s var(--ease)}
+@keyframes pgIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* nav v2 */
+.nav{padding:0 4vw;height:88px;background:linear-gradient(180deg,rgba(13,12,11,.75),transparent)}
+.nav.scrolled,.nav.solid{height:72px;padding:0 4vw;background:rgba(13,12,11,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.menu{gap:0;height:100%;align-items:stretch}
+.menu a{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 22px;opacity:.75;letter-spacing:.22em;font-size:10.5px;position:relative}
+.menu a small{font-family:var(--kr);font-size:10.5px;letter-spacing:.05em;text-transform:none;color:var(--mute);margin-top:5px;max-height:0;opacity:0;overflow:hidden;transition:all .45s var(--ease)}
+.menu a:hover small,.menu a.on small{max-height:20px;opacity:1}
+.menu a::after{bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px}
+.menu a:hover::after,.menu a.on::after{width:28px}
+.menu a.on{opacity:1;color:var(--gold-hi)}
+.nav-r{display:flex;align-items:center;gap:18px}
+.nav-tel{font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--mute);text-align:right;line-height:1.5}
+.nav-tel b{display:block;color:var(--gold);font-weight:500;font-size:10px}
+
+/* sub page header */
+.phead{position:relative;height:440px;display:flex;align-items:flex-end;overflow:hidden}
+.phead-bg{position:absolute;inset:-4%;background-size:cover;background-position:center;filter:brightness(.36) saturate(.85);animation:kb 26s ease-in-out infinite alternate}
+.phead::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,12,11,.6) 0%,transparent 40%,var(--ink) 100%)}
+.phead .wrap{position:relative;z-index:2;width:100%;padding-bottom:64px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.crumb{font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--mute);margin-bottom:22px;display:flex;gap:12px;align-items:center}
+.crumb a{color:var(--mute)}.crumb a:hover{color:var(--gold)}
+.crumb b{color:var(--gold);font-weight:500}
+.phead h1{font-family:var(--serif);font-weight:300;font-size:clamp(52px,6.4vw,96px);line-height:.95}
+.phead h1 em{font-style:italic;color:var(--gold)}
+.phead .kr-sub{font-family:var(--serif-kr);font-size:15px;color:var(--gold-hi);letter-spacing:.35em;margin-top:16px;font-weight:300}
+.phead p{max-width:420px;color:var(--mute);font-size:14px;line-height:2}
+.pnum{position:absolute;right:4vw;top:120px;z-index:2;font-family:var(--serif);font-size:13px;letter-spacing:.3em;color:var(--mute)}
+.pnum b{font-size:40px;color:var(--gold-hi);font-weight:300;letter-spacing:0;margin-right:6px}
+
+/* sub tabs (local nav) */
+.subnav{border-bottom:1px solid var(--line);background:var(--ink);position:sticky;top:72px;z-index:50}
+.subnav .wrap{display:flex;gap:0;overflow-x:auto}
+.subnav a{padding:22px 28px;font-size:13px;color:var(--mute);border-bottom:2px solid transparent;white-space:nowrap;transition:all .3s}
+.subnav a:hover{color:var(--cream)}
+.subnav a.on{color:var(--gold-hi);border-color:var(--gold)}
+
+/* home */
+.hero{height:100vh;min-height:720px}
+.quick{background:var(--ink);padding:0 0 120px;margin-top:-80px;position:relative;z-index:3}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.qcard{position:relative;aspect-ratio:3/4;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 28px;border:1px solid var(--line);cursor:pointer}
+.qcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42) saturate(.8);transition:transform 1.6s var(--ease),filter .8s}
+.qcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(13,12,11,.92));z-index:1}
+.qcard:hover img{transform:scale(1.08);filter:brightness(.6) saturate(1)}
+.qcard>*:not(img){position:relative;z-index:2}
+.qcard .fl{font-family:var(--serif);font-size:64px;font-weight:300;line-height:1;color:var(--gold-hi)}
+.qcard h3{font-family:var(--serif);font-weight:400;font-size:24px;margin-top:10px}
+.qcard span{font-size:12.5px;color:var(--mute);margin-top:4px;display:block}
+.qcard .arr{position:absolute;top:26px;right:26px;width:42px;height:42px;border:1px solid var(--line-2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);transition:all .5s var(--ease)}
+.qcard:hover .arr{background:var(--gold);color:var(--ink);transform:rotate(-45deg)}
+.home-info{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:14px;margin-top:14px}
+.hbox{border:1px solid var(--line);padding:36px 34px;background:var(--coal)}
+.hbox .lb{font-family:var(--sans);font-size:10px;letter-spacing:.35em;color:var(--gold);display:flex;justify-content:space-between;margin-bottom:22px}
+.hbox .lb a{color:var(--mute);letter-spacing:.2em}.hbox .lb a:hover{color:var(--gold)}
+.notice li{list-style:none;display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:13.5px;align-items:center}
+.notice li:first-child{border-top:1px solid var(--line)}
+.notice li i{font-style:normal;font-family:var(--sans);font-size:9px;letter-spacing:.15em;padding:4px 8px;border:1px solid var(--line-2);color:var(--gold);flex-shrink:0}
+.notice li em{font-style:normal;margin-left:auto;font-family:var(--sans);font-size:11px;color:var(--mute-2);flex-shrink:0}
+.notice li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbox .clock{font-size:52px}
+.hbox .cta{display:inline-block;margin-top:24px;font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:4px}
+
+/* about */
+.gallery-sec{background:var(--ink);padding:0 0 140px}
+
+/* facilities v2 (no clip) */
+.fimg{clip-path:none!important;opacity:1}
+.fpanel{transition:opacity .7s var(--ease),visibility .7s}
+.fpanel .fimg img{transform:scale(1.06)}
+.fpanel.on .fimg img{transform:scale(1)}
+.floor-stage{min-height:0}
+.fpanel:not(.on){position:absolute;top:0;left:0;right:0}
+.f-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.f-thumbs button{aspect-ratio:16/9;overflow:hidden;opacity:.4;transition:opacity .4s;border:1px solid transparent}
+.f-thumbs button.on,.f-thumbs button:hover{opacity:1;border-color:var(--gold)}
+.f-thumbs img{width:100%;height:100%;object-fit:cover}
+
+/* programs: trainer system v2 */
+.sys-top{text-align:center;max-width:760px;margin:0 auto 70px}
+.sys-top .sec-no{justify-content:center}
+.sys-top .sec-no::before{content:"";width:60px;height:1px;background:var(--gold-2)}
+.sys-top p{color:var(--mute);font-size:14.5px;line-height:2.05;margin-top:26px}
+.sys-top p b{color:var(--gold-hi);font-weight:400}
+.consent-wrap{border:1px solid var(--line);background:rgba(214,186,140,.025);padding:46px 40px 30px;position:relative}
+.consent-cap{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:22px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.consent-cap b{font-family:var(--serif-kr);font-weight:500;font-size:17px;display:block}
+.consent-cap small{font-size:12.5px;color:var(--mute);display:block;margin-top:6px;line-height:1.8}
+.consent-cap i{font-style:normal;font-family:var(--sans);font-size:9px;letter-spacing:.25em;color:var(--ink);background:var(--gold);padding:6px 10px;white-space:nowrap}
+.consent-legend{display:flex;gap:20px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.consent-legend span{font-size:12px;color:var(--mute);display:flex;align-items:center;gap:8px}
+.consent-legend span::before{content:"✓";width:18px;height:18px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);font-size:10px;display:flex;align-items:center;justify-content:center}
+.consent-legend span.x::before{content:"✕";border-color:#c27f7f;color:#c27f7f}
+.consent{max-width:440px}
+.swim-note{margin-top:80px;display:grid;grid-template-columns:1.2fr 1fr;border:1px solid var(--line)}
+.swim-note img{width:100%;height:100%;object-fit:cover;min-height:300px}
+.swim-note div{padding:50px 46px;background:var(--coal)}
+.swim-note h4{font-family:var(--serif);font-weight:300;font-size:40px;line-height:1.05}
+.swim-note h4 em{font-style:italic;color:var(--gold)}
+.swim-note .tlist{margin-top:26px}
+
+/* staff */
+.staff-sec{background:var(--ink)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:50px}
+.filters button{padding:12px 22px;border:1px solid var(--line-2);font-size:12.5px;color:var(--mute);transition:all .35s var(--ease);display:flex;gap:8px;align-items:center}
+.filters button em{font-style:normal;font-family:var(--sans);font-size:10px;color:var(--gold)}
+.filters button.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.filters button.on em{color:var(--ink)}
+.filters button:hover:not(.on){color:var(--cream);border-color:var(--gold)}
+.ceo{display:grid;grid-template-columns:380px 1fr;border:1px solid var(--line-2);margin-bottom:60px;background:linear-gradient(120deg,#211c16,#131110 60%);position:relative;overflow:hidden;cursor:pointer}
+.ceo::after{content:"FOUNDER";position:absolute;right:-10px;bottom:-30px;font-family:var(--serif);font-size:150px;color:transparent;-webkit-text-stroke:1px rgba(214,186,140,.08);line-height:1;pointer-events:none}
+.ceo .mono{aspect-ratio:auto;min-height:340px;border-right:1px solid var(--line)}
+.ceo-in{padding:50px 54px;display:flex;flex-direction:column;justify-content:center}
+.ceo-in .role{font-family:var(--sans);font-size:10px;letter-spacing:.35em;color:var(--gold)}
+.ceo-in h3{font-family:var(--serif-kr);font-weight:400;font-size:40px;margin:14px 0 4px;letter-spacing:.06em}
+.ceo-in .en{font-family:var(--serif);font-size:16px;letter-spacing:.3em;color:var(--mute)}
+.ceo-in blockquote{font-family:var(--serif-kr);font-weight:300;font-size:18px;line-height:1.8;color:var(--gold-hi);margin:28px 0 0;padding-left:20px;border-left:1px solid var(--gold)}
+.mono{position:relative;aspect-ratio:1/1.1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:
+  radial-gradient(circle at 30% 20%,rgba(214,186,140,.16),transparent 55%),
+  repeating-linear-gradient(135deg,rgba(214,186,140,.035) 0 1px,transparent 1px 14px),#161411}
+.mono b{font-family:var(--serif);font-weight:300;font-size:120px;line-height:1;background:linear-gradient(180deg,var(--gold-hi),var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform 1s var(--ease)}
+.mono .no{position:absolute;top:18px;left:20px;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--mute)}
+.mono .st{position:absolute;top:16px;right:16px;font-family:var(--sans);font-size:8.5px;letter-spacing:.2em;padding:5px 9px;border:1px solid var(--line-2);color:var(--gold-hi);display:flex;align-items:center;gap:6px}
+.mono .st::before{content:"";width:6px;height:6px;border-radius:50%;background:#7fc28b}
+.mono .st.wait::before{background:#d6a65a}
+.mono .st.full::before{background:#c27f7f}
+.mono .ring{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;border:1px solid var(--line);transition:all 1s var(--ease)}
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.scard{border:1px solid var(--line);background:var(--coal);cursor:pointer;transition:all .6s var(--ease);position:relative}
+.scard:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.scard:hover .mono b{transform:scale(1.08)}
+.scard:hover .ring{width:72%;border-color:var(--line-2)}
+.scard-in{padding:22px 22px 24px}
+.scard .role{font-family:var(--sans);font-size:9.5px;letter-spacing:.28em;color:var(--gold)}
+.scard h4{font-family:var(--serif-kr);font-weight:400;font-size:21px;margin:8px 0 2px;letter-spacing:.05em}
+.scard .en{font-family:var(--serif);font-size:13px;letter-spacing:.2em;color:var(--mute)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.tags span{font-size:10.5px;padding:4px 9px;background:rgba(214,186,140,.08);color:var(--gold-hi)}
+.scard .view{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--sans);font-size:9.5px;letter-spacing:.25em;color:var(--mute)}
+.scard .view b{color:var(--gold);font-weight:400;transition:transform .4s}
+.scard:hover .view b{transform:translateX(5px)}
+.scard.hide{display:none}
+.grp-h{display:flex;align-items:center;gap:18px;margin:60px 0 26px;font-family:var(--sans);font-size:10.5px;letter-spacing:.35em;color:var(--gold)}
+.grp-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.grp-h small{font-family:var(--kr);letter-spacing:.1em;color:var(--mute);font-size:12px}
+.grp.hide{display:none}
+
+[data-page=home] .hero-side{bottom:120px}
+.phead{height:520px}
+.grp[data-g=trainer] .staff-grid{grid-template-columns:repeat(5,1fr);gap:14px}
+.grp[data-g=trainer] .mono b{font-size:96px}
+.scard .role{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.staff-grid{align-items:stretch}.scard{display:flex;flex-direction:column}.scard-in{flex:1;display:flex;flex-direction:column}.scard .view{margin-top:auto}.scard .tags{margin-bottom:18px}
+@media(max-width:1180px){.grp[data-g=trainer] .staff-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.grp[data-g=trainer] .staff-grid{grid-template-columns:1fr}}
+
+/* notice touch */
+.notice li{cursor:pointer;transition:padding .4s var(--ease),background .4s;padding-left:6px;padding-right:6px;-webkit-tap-highlight-color:transparent}
+.notice li:hover,.notice li:focus-visible{background:rgba(214,186,140,.06);padding-left:14px;outline:none}
+.notice li:active{background:rgba(214,186,140,.12)}
+.notice li span{flex:1}
+.notice li:hover span{color:var(--gold-hi)}
+.notice li i{min-width:44px;text-align:center}
+.mbox.notice-box{grid-template-columns:1fr;width:min(720px,100%)}
+.nbody{padding:56px 52px 44px}
+.ntop{display:flex;align-items:center;gap:14px;font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--mute);margin-bottom:22px}
+.ntop i{font-style:normal;padding:5px 10px;border:1px solid var(--gold);color:var(--gold);letter-spacing:.15em}
+.ntop em{font-style:normal;margin-left:auto;margin-right:50px}
+.nbody h3{font-family:var(--serif-kr);font-weight:400;font-size:25px;line-height:1.55;padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.nbody p{color:#cfc6b8;font-size:14.5px;line-height:2;margin-bottom:12px}
+.nfoot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
+.nnav{display:flex;gap:8px}
+.nnav button{padding:10px 16px;border:1px solid var(--line-2);font-size:12px;color:var(--gold-hi);transition:all .3s}
+.nnav button:hover{background:var(--gold);color:var(--ink)}
+/* touch: cards & tabs */
+.qcard,.scard,.ceo,.ftab,.rule-h,.filters button,.strip figure{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.scard:active,.qcard:active{transform:scale(.98)}
+.grp[data-g=trainer] .staff-grid{grid-template-columns:repeat(5,1fr);gap:14px}
+.grp[data-g=trainer] .mono b{font-size:96px}
+.scard .role{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.staff-grid{align-items:stretch}.scard{display:flex;flex-direction:column}.scard-in{flex:1;display:flex;flex-direction:column}.scard .view{margin-top:auto}.scard .tags{margin-bottom:18px}
+@media(max-width:1180px){.grp[data-g=trainer] .staff-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.grp[data-g=trainer] .staff-grid{grid-template-columns:1fr}.nbody{padding:48px 24px 30px}.ntop em{margin-right:40px}}
+/* modal */
+.modal{position:fixed;inset:0;z-index:400;background:rgba(9,8,7,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:4vw;opacity:0;visibility:hidden;transition:all .6s var(--ease)}
+.modal.on{opacity:1;visibility:visible}
+.mbox{width:min(980px,100%);max-height:88vh;overflow:auto;display:grid;grid-template-columns:360px 1fr;background:var(--coal);border:1px solid var(--line-2);transform:translateY(30px) scale(.98);transition:transform .8s var(--ease);position:relative}
+.modal.on .mbox{transform:none}
+.mbox .mono{aspect-ratio:auto;min-height:100%;border-right:1px solid var(--line)}
+.mbox .mono b{font-size:150px}
+.mclose{position:absolute;top:18px;right:18px;z-index:5;width:40px;height:40px;border:1px solid var(--line-2);border-radius:50%;color:var(--gold);font-size:14px;transition:all .4s}
+.mclose:hover{background:var(--gold);color:var(--ink);transform:rotate(90deg)}
+.mbody{padding:48px 46px}
+.mbody .role{font-family:var(--sans);font-size:10px;letter-spacing:.32em;color:var(--gold)}
+.mbody h3{font-family:var(--serif-kr);font-weight:400;font-size:36px;margin:10px 0 2px;letter-spacing:.05em}
+.mbody .en{font-family:var(--serif);font-size:15px;letter-spacing:.25em;color:var(--mute)}
+.mbody blockquote{font-family:var(--serif-kr);font-weight:300;font-size:16px;line-height:1.85;color:var(--gold-hi);margin:24px 0;padding-left:18px;border-left:1px solid var(--gold)}
+.mrows{border-top:1px solid var(--line)}
+.mrow{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.mrow span{font-family:var(--sans);font-size:9.5px;letter-spacing:.25em;color:var(--mute);padding-top:3px}
+.mrow ul{list-style:none}
+.mrow li{padding:2px 0}
+.mrow li::before{content:"— ";color:var(--gold-2)}
+.mbtn{margin-top:28px;display:inline-flex;align-items:center;gap:14px;padding:16px 26px;background:var(--gold);color:var(--ink);font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.3em;transition:all .4s}
+.mbtn:hover{background:var(--gold-hi)}
+.mbtn.dis{background:transparent;border:1px solid var(--line-2);color:var(--mute);pointer-events:none}
+
+/* footer compact */
+footer{padding:70px 0 34px}
+.f-big{margin:40px 0 24px;font-size:clamp(48px,10vw,160px)}
+
+@media(max-width:1180px){
+  .menu{display:none}.burger{display:block}.nav-tel{display:none}
+  .quick-grid,.staff-grid{grid-template-columns:1fr 1fr}
+  .home-info{grid-template-columns:1fr}
+  .ceo,.mbox,.swim-note{grid-template-columns:1fr}
+  .ceo .mono{min-height:260px;border-right:0;border-bottom:1px solid var(--line)}
+  .mbox .mono{min-height:240px;border-right:0}
+  .subnav{top:72px}
+}
+@media(max-width:640px){
+  .quick-grid,.staff-grid{grid-template-columns:1fr}
+  .phead{height:380px}
+  .mbody,.ceo-in{padding:34px 26px}
+  .consent-wrap{padding:30px 18px}
+  .consent .node{width:110px}.consent .node .c{width:84px;height:84px}.consent .node .c b{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="loader" id="loader">
+  <div class="mark"><i style="animation-delay:.05s">O</i><i style="animation-delay:.1s">F</i><i style="animation-delay:.15s">F</i>&nbsp;<i style="animation-delay:.25s;font-style:italic;font-size:.6em">the</i>&nbsp;<i style="animation-delay:.35s">F</i><i style="animation-delay:.4s">I</i><i style="animation-delay:.45s">T</i></div>
+  <div class="bar"></div>
+  <small>PREMIUM FITNESS CLUB</small>
+</div>
+<div class="glow" id="glow"></div>
+
+<!-- ═════ NAV ═════ -->
+<nav class="nav" id="nav">
+  <a href="#home" class="logo">
+    <div class="logo-mark"><span></span><span></span></div>
+    <div class="logo-txt">OFF THE FIT<small>NONHYEON · SEOUL</small></div>
+  </a>
+  <div class="menu" id="menu">
+    <a href="#about">About<small>클럽 소개</small></a>
+    <a href="#facilities">Facilities<small>시설 안내</small></a>
+    <a href="#programs">Programs<small>프로그램</small></a>
+    <a href="#staff">Staff<small>직원 소개</small></a>
+    <a href="#rules">Club Code<small>운영 규정</small></a>
+    <a href="#community">Community<small>회원 커뮤니티</small></a>
+    <a href="#contact">Contact<small>오시는 길 · 상담</small></a>
+  </div>
+  <div class="nav-r">
+    <div class="nav-tel"><b>OPEN DAILY</b>06:00 — 24:00</div>
+    <a href="#contact" class="nav-cta">MEMBERSHIP</a>
+    <button class="burger" id="burger" aria-label="메뉴"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mnav" id="mnav">
+  <button class="x" id="mx">CLOSE ✕</button>
+  <a href="#home">Home<small>홈</small></a>
+  <a href="#about">About<small>클럽 소개</small></a>
+  <a href="#facilities">Facilities<small>시설 안내</small></a>
+  <a href="#programs">Programs<small>프로그램</small></a>
+  <a href="#staff">Staff<small>직원 소개</small></a>
+  <a href="#rules">Club Code<small>운영 규정</small></a>
+  <a href="#community">Community<small>커뮤니티</small></a>
+  <a href="#contact" style="color:var(--gold)">Contact<small>오시는 길 · 상담</small></a>
+</div>
+
+<main>
+<!-- ═════════════ HOME ═════════════ -->
+<div class="page" data-page="home">
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-in">
+      <div class="eyebrow reveal-h d1">Members Only · Nonhyeon, Seoul</div>
+      <h1 class="reveal-h d2">OFF<span class="the">the</span>FIT<i class="slash"></i></h1>
+      <div class="kr reveal-h d2">오프 더 핏</div>
+      <div class="club reveal-h d3">PREMIUM FITNESS CLUB</div>
+      <p class="quote reveal-h d4">“ 운동은 <b>정직하게</b>, 사생활은 <b>알아서</b>. ”</p>
+    </div>
+    <div class="hero-side l"><em>B1 — 3F</em>NONHYEON-DONG, GANGNAM</div>
+    <div class="hero-side r"><em>06:00 — 24:00</em>OPEN EVERY DAY</div>
+  </header>
+
+  <section class="quick">
+    <div class="wrap">
+      <div class="quick-grid">
+        <a class="qcard reveal" href="#facilities" data-floor="3"><img src="img/bce48c98.jpg" alt=""><div class="arr">→</div><div class="fl">B1</div><h3>Swimming Pool</h3><span>실내 수영장 · 수영 레슨</span></a>
+        <a class="qcard reveal d1" href="#facilities" data-floor="2"><img src="img/3bbbb6d1.jpg" alt=""><div class="arr">→</div><div class="fl">1F</div><h3>Reception &amp; Lounge</h3><span>리셉션 · 상담실 · 단백질 바</span></a>
+        <a class="qcard reveal d2" href="#facilities" data-floor="1"><img src="img/c3628350.jpg" alt=""><div class="arr">→</div><div class="fl">2F</div><h3>Main Training</h3><span>웨이트 · 유산소 · 프리웨이트</span></a>
+        <a class="qcard reveal d3" href="#facilities" data-floor="0"><img src="img/23908315.jpg" alt=""><div class="arr">→</div><div class="fl">3F</div><h3>Private PT</h3><span>PT룸 × 3 · 스트레칭룸</span></a>
+      </div>
+      <div class="home-info">
+        <div class="hbox reveal">
+          <div class="lb"><span>NOTICE · 공지사항</span><a href="#community">MORE +</a></div>
+          <ul class="notice" id="notice"></ul>
+        </div>
+        <div class="hbox reveal d1">
+          <div class="lb"><span>HOURS · 운영시간</span></div>
+          <div class="clock">06<span>—</span>24</div>
+          <div class="sub">연중무휴 · 매일 06:00 ~ 24:00</div>
+          <div class="now" data-now><i></i><span>CHECKING…</span></div>
+        </div>
+        <div class="hbox reveal d2">
+          <div class="lb"><span>MEMBERSHIP · 입회</span></div>
+          <div class="addr" style="font-size:20px">첫 방문은<br>1층 상담실에서 시작됩니다.</div>
+          <a href="#contact" class="cta">상담 예약하기 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═════════════ ABOUT ═════════════ -->
+<div class="page" data-page="about">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/1442b03b.jpg);filter:blur(10px) brightness(.35)"></div>
+    <div class="pnum"><b>01</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>ABOUT</b></div><h1>The <em>Club</em></h1><div class="kr-sub">클럽 소개</div></div>
+    <p>논현동 주상복합 상가, 지하 1층부터 지상 3층까지. 약 450평 규모의 회원제 프리미엄 피트니스 클럽.</p></div>
+  </div>
+  <section class="philo pad">
+    <div class="wrap philo-grid">
+      <div class="philo-img reveal">
+        <img src="img/3bbbb6d1.jpg" alt="오프 더 핏 1층 리셉션과 라운지">
+        <div class="philo-tag"><b>450</b><small>PYEONG · 4 FLOORS</small></div>
+      </div>
+      <div>
+        <div class="sec-no reveal">PHILOSOPHY</div>
+        <h2 class="big-quote reveal d1"><span class="q">“</span>땀은 <b>거짓말을 하지 않고</b>,<br>우리는 <b>묻지 않습니다</b>.</h2>
+        <p class="reveal d2">논현동 주상복합 한가운데, 지하 1층부터 지상 3층까지. 오프 더 핏은 하루를 마친 직장인과 프리랜서, 그리고 이웃들이 오롯이 자신의 몸에만 집중할 수 있도록 설계된 회원제 클럽입니다.</p>
+        <p class="reveal d3">기록은 정직하게 남기되, 그 밖의 일은 각자의 몫으로. 운동 앞에서는 모두에게 같은 기준을, 운동 밖에서는 모두에게 같은 거리를 지킵니다.</p>
+        <div class="stats reveal d4">
+          <div class="stat"><b data-count="450">0</b><small>TOTAL PYEONG</small></div>
+          <div class="stat"><b data-count="4">0</b><small>FLOORS</small></div>
+          <div class="stat"><b data-count="18" data-sup="H">0</b><small>OPEN DAILY</small></div>
+          <div class="stat"><b data-count="5">0</b><small>TRAINERS</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="gallery-sec">
+    <div class="wrap"><div class="sec-no reveal" style="margin-bottom:30px">GALLERY</div></div>
+    <div class="strip gallery">
+      <figure><img src="img/1442b03b.jpg" alt="오프 더 핏 메인 로비"><figcaption><b>The Lobby</b>NIGHT VIEW</figcaption></figure>
+      <figure><img src="img/bce48c98.jpg" alt="수영장"><figcaption><b>B1 Pool</b>25M · 4 LANES</figcaption></figure>
+      <figure><img src="img/c3628350.jpg" alt="트레이닝 존"><figcaption><b>2F Training</b>MAIN ZONE</figcaption></figure>
+      <figure><img src="img/23908315.jpg" alt="3층 PT룸"><figcaption><b>3F Private</b>PT ROOMS</figcaption></figure>
+      <figure><img src="img/3bbbb6d1.jpg" alt="라운지"><figcaption><b>1F Lounge</b>PROTEIN BAR</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════ FACILITIES ═════════════ -->
+<div class="page" data-page="facilities">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/c3628350.jpg)"></div>
+    <div class="pnum"><b>02</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>FACILITIES</b></div><h1>Four <em>Floors</em></h1><div class="kr-sub">층별 시설 안내</div></div>
+    <p>수영장부터 프라이빗 PT룸까지. 층마다 목적이 다르고, 그래서 동선도 다릅니다. 왼쪽에서 층을 선택하세요.</p></div>
+  </div>
+  <section class="floors pad" style="padding-top:100px">
+    <div class="wrap">
+      <div class="floor-ui">
+        <div class="floor-tabs" id="ftabs">
+          <button class="ftab" data-f="0"><b>3F</b><small>PRIVATE PT</small></button>
+          <button class="ftab" data-f="1"><b>2F</b><small>MAIN TRAINING</small></button>
+          <button class="ftab on" data-f="2"><b>1F</b><small>RECEPTION</small></button>
+          <button class="ftab" data-f="3"><b>B1</b><small>SWIMMING POOL</small></button>
+        </div>
+        <div class="floor-stage">
+          <div class="fpanel" data-p="0">
+            <div class="fimg"><img src="img/23908315.jpg" alt="3층 프라이빗 PT 및 부대시설"><div class="fl-badge">3F · PRIVATE &amp; AMENITIES</div></div>
+            <div class="finfo">
+              <div><h3>Private <em>Training</em><br>&amp; Amenities</h3><div class="kr-t">프라이빗 PT & 부대시설</div><p>방음 설계된 독립 PT룸 3실은 트레이너 공동 예약제로 운영됩니다. 시선이 닿지 않는 곳에서, 오직 1:1의 시간.</p></div>
+              <ul class="flist">
+                <li><span>01</span>개별 PT룸 × 3<em>RESERVATION</em></li>
+                <li><span>02</span>스트레칭룸<em>RECOVERY</em></li>
+                <li><span>03</span>여성 샤워실 · 탈의실<em>WOMEN</em></li>
+                <li><span>04</span>남성 샤워실 · 탈의실<em>MEN</em></li>
+                <li><span>05</span>직원 휴게실<em>STAFF ONLY</em></li>
+              </ul>
+            </div>
+          </div>
+          <div class="fpanel" data-p="1">
+            <div class="fimg"><img src="img/c3628350.jpg" alt="2층 메인 트레이닝 존"><div class="fl-badge">2F · MAIN TRAINING ZONE</div></div>
+            <div class="finfo">
+              <div><h3>Main <em>Training</em><br>Zone</h3><div class="kr-t">메인 트레이닝 존</div><p>통창 너머 강남의 스카이라인. 대부분의 PT가 이곳에서 진행되는, 오프 더 핏의 심장과 같은 공간입니다.</p></div>
+              <ul class="flist">
+                <li><span>01</span>스트렝스 머신 존<em>STRENGTH</em></li>
+                <li><span>02</span>프리웨이트 구역<em>FREE WEIGHT</em></li>
+                <li><span>03</span>유산소 존<em>CARDIO</em></li>
+                <li><span>04</span>퍼스널 트레이닝 존<em>PT</em></li>
+              </ul>
+            </div>
+          </div>
+          <div class="fpanel on" data-p="2">
+            <div class="fimg"><img src="img/3bbbb6d1.jpg" alt="1층 리셉션과 라운지"><div class="fl-badge">1F · RECEPTION &amp; LOUNGE</div></div>
+            <div class="finfo">
+              <div><h3>Reception<br>&amp; <em>Lounge</em></h3><div class="kr-t">리셉션 & 라운지</div><p>대리석 데스크와 따뜻한 조명. 상담부터 운동 후의 단백질 한 잔까지, 클럽의 첫인상과 마지막 인사가 머무는 곳.</p></div>
+              <ul class="flist">
+                <li><span>01</span>출입 데스크<em>RECEPTION</em></li>
+                <li><span>02</span>상담실<em>CONSULTATION</em></li>
+                <li><span>03</span>단백질 음료 바<em>PROTEIN BAR</em></li>
+                <li><span>04</span>회원 휴게 라운지<em>MEMBER LOUNGE</em></li>
+              </ul>
+            </div>
+          </div>
+          <div class="fpanel" data-p="3">
+            <div class="fimg"><img src="img/bce48c98.jpg" alt="지하 1층 수영장"><div class="fl-badge">B1 · SWIMMING POOL</div></div>
+            <div class="finfo">
+              <div><h3>The <em>Swimming</em><br>Pool</h3><div class="kr-t">실내 수영장</div><p>25m 4레인 랩 풀과 별도의 강습 구역. 물소리만 남는 지하의 고요함 속에서 하루를 정리하세요.</p></div>
+              <ul class="flist">
+                <li><span>01</span>실내 수영장 (25m · 4 Lanes)<em>LAP POOL</em></li>
+                <li><span>02</span>수영 강습 구역<em>LESSON</em></li>
+                <li><span>03</span>풀사이드 휴식 공간<em>POOLSIDE</em></li>
+                <li><span>04</span>수영장 전용 샤워실 · 탈의실<em>POOL ONLY</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═════════════ PROGRAMS ═════════════ -->
+<div class="page" data-page="programs">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/23908315.jpg)"></div>
+    <div class="pnum"><b>03</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>PROGRAMS</b></div><h1>Choose your <em>discipline</em></h1><div class="kr-sub">멤버십 & 프로그램</div></div>
+    <p>일반 회원권으로 자유롭게, 1:1 PT로 깊이 있게. 원하는 만큼만 선택하고, 원하는 만큼만 머무르세요.</p></div>
+  </div>
+  <section class="programs pad" style="padding-top:100px">
+    <div class="wrap">
+      <div class="prog-grid">
+        <div class="prog reveal">
+          <span class="num">i.</span>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="12" width="32" height="24" rx="2"/><path d="M8 19h32M14 29h8"/></svg>
+          <h4>Membership</h4><h5>일반 회원권</h5>
+          <p>전 층 시설 자유 이용. 수영장 자유 수영, 라운지, 샤워·탈의실까지 모두 포함됩니다.</p>
+          <a href="#contact" class="more">INQUIRE</a>
+        </div>
+        <div class="prog feat reveal d1">
+          <span class="tag">SIGNATURE</span>
+          <span class="num">ii.</span>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 24h36M10 17v14M14 14v20M34 14v20M38 17v14"/></svg>
+          <h4>1:1 Personal Training</h4><h5>1:1 PT</h5>
+          <p>담당 트레이너를 회원이 직접 지명합니다. 3층 프라이빗 PT룸 또는 2층 트레이닝 존에서 진행됩니다.</p>
+          <a href="#staff" class="more">MEET TRAINERS</a>
+        </div>
+        <div class="prog reveal d2">
+          <span class="num">iii.</span>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="16" cy="18" r="5"/><circle cx="32" cy="18" r="5"/><circle cx="24" cy="14" r="5"/><path d="M8 38c0-6 4-10 8-10M40 38c0-6-4-10-8-10M14 38c0-7 4-11 10-11s10 4 10 11"/></svg>
+          <h4>Small Class</h4><h5>소규모 클래스</h5>
+          <p>소수 정원의 그룹 클래스. 스트레칭룸과 트레이닝 존에서 함께하지만, 결코 붐비지 않게.</p>
+          <a href="#contact" class="more">INQUIRE</a>
+        </div>
+        <div class="prog reveal d3">
+          <span class="num">iv.</span>
+          <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="32" cy="13" r="4"/><path d="M8 26l10-6 8 4 6-6M4 34c4-3 6-3 10 0s6 3 10 0 6-3 10 0 6 3 10 0M4 41c4-3 6-3 10 0s6 3 10 0 6-3 10 0 6 3 10 0"/></svg>
+          <h4>Swim Lesson</h4><h5>수영 레슨</h5>
+          <p>자유 수영은 상시, 강사의 1:1 · 소규모 레슨은 지정 시간대에만 운영됩니다.</p>
+          <a href="#contact" class="more">INQUIRE</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="system pad">
+    <div class="wrap">
+      <div class="sys-top">
+        <div class="sec-no reveal">TRAINER SYSTEM</div>
+        <h2 class="h2 reveal d1">You choose. <em>They compete.</em></h2>
+        <div class="h2-kr reveal d2">트레이너 지명 · 실적제 · 3자 동의제</div>
+        <p class="reveal d3">오프 더 핏의 1:1 PT는 회원이 <b>담당 트레이너를 직접 지명</b>하는 방식으로 운영됩니다. 트레이너의 월간 실적은 직원들에게 공개되고, 한 번 정해진 담당을 바꾸려면 <b>아래 세 사람 모두의 동의</b>가 필요합니다.</p>
+      </div>
+      <div class="sys-grid">
+        <div class="consent-wrap reveal">
+          <div class="consent-cap">
+            <div><b>담당 트레이너 변경 절차</b><small>세 사람 중 한 명이라도 거부하면 변경할 수 없습니다.<br>단, PT 계약 해지와 일반 회원권 이용은 자유롭습니다.</small></div>
+            <i>RULE 02</i>
+          </div>
+          <div class="consent">
+            <svg viewBox="0 0 500 500">
+              <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#b8986a"/><stop offset="1" stop-color="#f1dfbd"/></linearGradient></defs>
+              <circle cx="250" cy="275" r="150" fill="none" stroke="rgba(214,186,140,.12)"/>
+              <circle cx="250" cy="275" r="200" fill="none" stroke="rgba(214,186,140,.06)"/>
+              <path class="dash" d="M250 90 L95 360 L405 360 Z" fill="none" stroke="url(#g1)" stroke-width="1"/>
+            </svg>
+            <div class="node" style="left:50%;top:15%"><div class="c"><b>Me</b><small>MEMBER</small></div><span>회원 본인</span></div>
+            <div class="node" style="left:19%;top:76%"><div class="c"><b>A</b><small>CURRENT</small></div><span>기존 담당 트레이너</span></div>
+            <div class="node" style="left:81%;top:76%"><div class="c"><b>B</b><small>NEW</small></div><span>신규 담당 트레이너</span></div>
+            <div class="center"><b>3/3</b><small>CONSENT</small></div>
+          </div>
+          <div class="consent-legend"><span>3명 모두 동의 → 변경 가능</span><span class="x">1명이라도 거부 → 변경 불가</span></div>
+        </div>
+        <div>
+          <div class="sys-list" style="margin-top:0">
+            <div class="sys-item reveal"><i>a.</i><div><h6>담당 트레이너 직접 지명</h6><p>상담 후 회원이 직접 담당 트레이너를 선택합니다. 선택은 온전히 회원의 몫입니다.</p></div></div>
+            <div class="sys-item reveal d1"><i>b.</i><div><h6>월간 실적 공개</h6><p>매월 신규 등록과 재등록 실적이 직원들에게 공개됩니다. 트레이너는 결과로 증명합니다.</p></div></div>
+            <div class="sys-item reveal d2"><i>c.</i><div><h6>담당 변경은 3자 모두의 동의로</h6><p>기존·신규 트레이너와 회원 본인, 셋 중 한 명이라도 거부하면 변경할 수 없습니다.</p></div></div>
+          </div>
+          <div class="leader reveal d3">
+            <div class="leader-h"><span>MONTHLY RANKING · STAFF ONLY</span><b>● LIVE</b></div>
+            <div class="lrow"><i>01</i><span class="blur">트레이너 ○</span><div class="bar" style="--w:94%"></div><em>94</em></div>
+            <div class="lrow"><i>02</i><span class="blur">트레이너 ○</span><div class="bar" style="--w:88%"></div><em>88</em></div>
+            <div class="lrow"><i>03</i><span class="blur">트레이너 ○</span><div class="bar" style="--w:71%"></div><em>71</em></div>
+            <div class="lrow"><i>04</i><span class="blur">트레이너 ○</span><div class="bar" style="--w:63%"></div><em>63</em></div>
+            <div class="lrow"><i>05</i><span class="blur">트레이너 ○</span><div class="bar" style="--w:49%"></div><em>49</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swim-note reveal">
+        <img src="img/bce48c98.jpg" alt="수영장">
+        <div>
+          <div class="sec-no">SWIM LESSON POLICY</div>
+          <h4>Free swim &amp;<br><em>private lessons</em></h4>
+          <ul class="tlist">
+            <li><span>일반 회원 자유 수영</span><b>운영시간 내 상시</b></li>
+            <li><span>강사 1:1 레슨</span><b>지정 시간대</b></li>
+            <li><span>소규모 레슨</span><b>지정 시간대</b></li>
+            <li><span>전용 샤워 · 탈의실</span><b>B1 POOL ONLY</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═════════════ STAFF ═════════════ -->
+<div class="page" data-page="staff">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/c3628350.jpg);background-position:center 30%"></div>
+    <div class="pnum"><b>04</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>STAFF</b></div><h1>Our <em>People</em></h1><div class="kr-sub">직원 소개</div></div>
+    <p>대표 1명, 수영 강사를 포함한 트레이너 5명, 데스크 · 운영관리팀까지. 카드를 누르면 상세 프로필을 볼 수 있습니다.</p></div>
+  </div>
+  <section class="staff-sec pad" style="padding-top:90px">
+    <div class="wrap">
+      <div class="filters" id="filters"></div>
+      <div id="roster"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ═════════════ RULES ═════════════ -->
+<div class="page" data-page="rules">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/3bbbb6d1.jpg)"></div>
+    <div class="pnum"><b>05</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>CLUB CODE</b></div><h1>Seven <em>quiet rules</em></h1><div class="kr-sub">운영 규정</div></div>
+    <p>오프 더 핏의 모든 회원과 직원이 함께 지키는 일곱 가지 약속. 길지 않지만, 가볍지도 않습니다.</p></div>
+  </div>
+  <section class="code pad" style="padding-top:100px">
+    <div class="wrap code-grid">
+      <div class="code-side">
+        <div class="sec-no reveal">THE CLUB CODE</div>
+        <h2 class="h2 reveal d1">운동은 정직하게,<br><em>사생활은 알아서.</em></h2>
+        <div class="stamp reveal d2">
+          <svg viewBox="0 0 170 170"><defs><path id="cp" d="M85,85 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0"/></defs><text font-family="Montserrat" font-size="10" letter-spacing="5.2" fill="#d6ba8c"><textPath href="#cp">OFF THE FIT · MEMBERS ONLY · CLUB CODE ·</textPath></text></svg>
+          <b>VII</b>
+        </div>
+      </div>
+      <div class="rules">
+        <div class="rule open reveal"><button class="rule-h"><span class="n">01</span><span class="t">트레이너 지명 · 실적제<small>NOMINATION &amp; PERFORMANCE</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p>회원은 담당 트레이너를 <b>직접 선택</b>합니다. 매월 신규 등록 및 재등록 실적이 직원들에게 공개되며, 트레이너 간 실적 경쟁이 존재합니다.</p></div></div></div>
+        <div class="rule reveal"><button class="rule-h"><span class="n">02</span><span class="t">담당 변경 3자 동의제<small>THREE-PARTY CONSENT</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p>기존 담당 트레이너 · 신규 담당 트레이너 · 회원 본인 <b>모두가 동의해야</b> 변경이 가능합니다. 한 명이라도 거부하면 변경할 수 없습니다.<br><span class="note">단, PT 계약 해지와 일반 회원권 이용은 자유롭습니다.</span></p></div></div></div>
+        <div class="rule reveal"><button class="rule-h"><span class="n">03</span><span class="t">연애 규정<small>ON RELATIONSHIPS</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p><b>직원 간 연애는 금지</b>됩니다. 회원과의 연애는 명시적으로 금지하지 않으나, 사적인 연애 문제에 대해 센터는 책임지지 않습니다.<br><span class="note">운동은 정직하게, 사생활은 알아서.</span></p></div></div></div>
+        <div class="rule reveal"><button class="rule-h"><span class="n">04</span><span class="t">정기 회식<small>MONTHLY GATHERING</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p>매월 <b>마지막 금요일</b>, 전 직원 참석을 원칙으로 하는 정기 회식이 열립니다.</p></div></div></div>
+        <div class="rule reveal"><button class="rule-h"><span class="n">05</span><span class="t">프라이빗 PT룸 예약제<small>PRIVATE ROOM BOOKING</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p>3층 PT룸 3개는 <b>트레이너 공동 예약제</b>로 운영됩니다. 인기 시간대에는 예약 경쟁이 발생하며, 트레이너 간 시간 조율이 필요합니다.</p></div></div></div>
+        <div class="rule reveal"><button class="rule-h"><span class="n">06</span><span class="t">회원 전용 익명 커뮤니티<small>ANONYMOUS COMMUNITY</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p>센터 자체 앱에서 운동 · 식단 정보, 트레이너 추천 및 후기, <b>익명 연애 상담과 목격담</b> 등을 자유롭게 공유할 수 있습니다.</p></div></div></div>
+        <div class="rule reveal"><button class="rule-h"><span class="n">07</span><span class="t">수영 센터 강습 규정<small>SWIM LESSON POLICY</small></span><span class="pm"></span></button>
+          <div class="rule-b"><div><p>일반 회원의 <b>자유 수영</b>과 강사의 <b>1:1 · 소규모 수영 레슨</b>이 모두 가능합니다.<br><span class="note">1:1 · 소규모 레슨은 지정 시간대에만 이용 가능합니다.</span></p></div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═════════════ COMMUNITY ═════════════ -->
+<div class="page" data-page="community">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/3bbbb6d1.jpg);background-position:right center"></div>
+    <div class="pnum"><b>06</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>COMMUNITY</b></div><h1>Whispers, <em>anonymously</em></h1><div class="kr-sub">회원 전용 익명 커뮤니티</div></div>
+    <p>회원 인증을 거친 사람만 들어올 수 있는, 오프 더 핏 자체 앱 속 작은 광장.</p></div>
+  </div>
+  <section class="comm pad" style="padding-top:100px">
+    <div class="wrap comm-grid">
+      <div>
+        <div class="sec-no reveal">MEMBERS APP</div>
+        <h2 class="h2 reveal d1">오늘의 식단부터<br><em>차마 못 할 이야기까지.</em></h2>
+        <p class="lead reveal d2" style="margin-top:28px">운동 · 식단 정보, 트레이너 추천과 후기, 그리고 이름 걸고는 못 할 연애 상담과 목격담까지. 모든 글은 익명으로 게시됩니다.</p>
+        <div class="feat-list reveal d3">
+          <div><b>Workout &amp; Diet</b><span>운동 · 식단 정보 공유</span></div>
+          <div><b>Trainer Reviews</b><span>트레이너 추천 및 후기</span></div>
+          <div><b>Love Advice</b><span>익명 연애 상담</span></div>
+          <div><b>Spotted</b><span>목격담 게시판</span></div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="app-h"><div><b>OFF THE FIT</b><small>MEMBERS COMMUNITY</small></div><div class="dot"></div></div>
+            <div class="chips"><span class="on">전체</span><span>운동·식단</span><span>트레이너</span><span>연애상담</span><span>목격담</span></div>
+            <div class="feed"><div class="feed-track" id="feed"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═════════════ CONTACT ═════════════ -->
+<div class="page" data-page="contact">
+  <div class="phead"><div class="phead-bg" style="background-image:url(img/1442b03b.jpg);filter:blur(10px) brightness(.35)"></div>
+    <div class="pnum"><b>07</b>/ 07</div>
+    <div class="wrap"><div><div class="crumb"><a href="#home">HOME</a>›<b>CONTACT</b></div><h1>Visit &amp; <em>Inquiry</em></h1><div class="kr-sub">오시는 길 · 입회 상담</div></div>
+    <p>상담실에서 체성분과 목표를 함께 확인한 뒤, 회원권과 프로그램, 담당 트레이너를 안내해 드립니다.</p></div>
+  </div>
+  <section class="visit pad" style="padding-top:100px;padding-bottom:0">
+    <div class="wrap">
+      <div class="visit-grid reveal">
+        <div class="vbox">
+          <span class="lb">HOURS</span>
+          <div class="clock">06<span>—</span>24</div>
+          <div class="sub">연중무휴 · 매일 06:00 ~ 24:00<br>마지막 입장은 23:00 권장</div>
+          <div class="now" data-now><i></i><span>CHECKING…</span></div>
+        </div>
+        <div class="vbox">
+          <span class="lb">LOCATION</span>
+          <div class="addr">서울 강남구 논현동<br>주상복합 상가 B1 – 3F<small>NONHYEON-DONG, GANGNAM, SEOUL</small></div>
+          <div class="map"><div class="pin"><i></i><b>OFF THE FIT</b></div></div>
+        </div>
+        <div class="vbox">
+          <span class="lb">AT A GLANCE</span>
+          <ul class="tlist">
+            <li><span>자유 수영</span><b>운영시간 내 상시</b></li>
+            <li><span>1:1 · 소규모 수영 레슨</span><b>지정 시간대</b></li>
+            <li><span>1:1 PT</span><b>트레이너 예약제</b></li>
+            <li><span>3F 프라이빗 PT룸</span><b>공동 예약제</b></li>
+            <li><span>단백질 음료 바</span><b>1F 라운지</b></li>
+            <li><span>입회 상담</span><b>1F 상담실</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="inq">
+    <div class="inq-bg"></div>
+    <div class="wrap">
+      <div>
+        <div class="sec-no reveal">MEMBERSHIP</div>
+        <h2 class="h2 reveal d1">Your first<br>session <em>starts<br>at the desk.</em></h2>
+        <p class="lead reveal d2" style="margin-top:28px">남겨주신 정보는 상담 목적 외에 사용되지 않습니다.</p>
+      </div>
+      <form class="form reveal d2" id="form">
+        <h4>Private Consultation</h4>
+        <small>담당 매니저가 24시간 이내에 연락드립니다.</small>
+        <div class="field"><input type="text" id="nm" placeholder=" " required><label for="nm">성함</label></div>
+        <div class="field"><input type="tel" id="ph" placeholder=" " required><label for="ph">연락처</label></div>
+        <span class="pick-l">관심 프로그램</span>
+        <div class="pick" id="pick">
+          <label><input type="checkbox" name="p" value="m" checked><span>일반 회원권</span></label>
+          <label><input type="checkbox" name="p" value="pt"><span>1:1 PT</span></label>
+          <label><input type="checkbox" name="p" value="c"><span>소규모 클래스</span></label>
+          <label><input type="checkbox" name="p" value="s"><span>수영 레슨</span></label>
+        </div>
+        <div class="field sel"><select id="tr"><option value="">지정 안 함</option></select><label for="tr">희망 트레이너</label></div>
+        <div class="field sel"><select id="tm"><option>평일 오전 (06–12)</option><option>평일 오후 (12–18)</option><option>평일 저녁 (18–24)</option><option>주말</option></select><label for="tm">희망 상담 시간</label></div>
+        <button type="submit" class="btn">REQUEST A VISIT</button>
+        <div class="privacy">운동은 정직하게, 개인정보는 철저하게.</div>
+      </form>
+    </div>
+  </section>
+</div>
+</main>
+
+<!-- ═════ FOOTER ═════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <div class="logo"><div class="logo-mark"><span></span><span></span></div><div class="logo-txt">OFF THE FIT<small>PREMIUM FITNESS CLUB</small></div></div>
+        <p>“운동은 정직하게, 사생활은 알아서.”</p>
+      </div>
+      <div class="f-col"><h6>CLUB</h6><a href="#about">클럽 소개</a><a href="#facilities">시설 안내</a><a href="#programs">프로그램</a><a href="#staff">직원 소개</a></div>
+      <div class="f-col"><h6>MEMBERS</h6><a href="#rules">운영 규정</a><a href="#community">회원 커뮤니티</a><a href="#contact">입회 상담</a></div>
+      <div class="f-col"><h6>VISIT</h6><span>서울 강남구 논현동</span><span>주상복합 상가 B1 – 3F</span><span>매일 06:00 – 24:00</span></div>
+    </div>
+    <div class="f-big">OFF THE FIT</div>
+    <div class="f-bot"><span>© 2026 OFF THE FIT. ALL RIGHTS RESERVED.</span><span>NONHYEON-DONG · GANGNAM · SEOUL</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i>✓</i><div><b>상담 신청이 접수되었습니다</b><small>담당 매니저가 곧 연락드릴게요.</small></div></div>
+<div class="lb" id="lb"><img alt=""></div>
+<div class="modal" id="modal"><div class="mbox" id="mbox"></div></div>
+
+<script>
+/* ════════ 직원 명단 데이터 — 여기만 고치면 직원 페이지 전체가 바뀜 ════════ */
+const STAFF = [
+  {grp:'ceo', no:'00', name:'강태헌', en:'KANG TAE-HEON', role:'대표', roleEn:'FOUNDER & CEO',
+   quote:'운동 앞에서는 모두에게 같은 기준을, 운동 밖에서는 모두에게 같은 거리를.',
+   tags:['센터 총괄','입회 최종 상담'], info:{'담당':'센터 운영 총괄 · 트레이너 실적 관리','근무':'평일 10:00 – 19:00','위치':'1F 상담실'},
+   career:['전 국가대표 상비군 컨디셔닝 코치','강남권 프리미엄 피트니스 3개 지점 총괄 매니저','2024 오프 더 핏 설립']},
+
+  {grp:'trainer', no:'01', name:'차시율', en:'CHA SI-YUL', role:'2층 수석 PT 트레이너', roleEn:'HEAD PT TRAINER · 2F', status:'wait',
+   quote:'세트 끝날 때까지 숫자는 제가 셉니다. 회원님은 버티기만 하세요.',
+   tags:['수석 트레이너','근력 강화','고강도 PT'], info:{'프로필':'32세 · 188cm','주 공간':'2F 메인 트레이닝 존','직책':'2층 수석 PT 트레이너','PT 상태':'대기 접수 중'},
+   career:['오프 더 핏 2층 메인 트레이닝 존 수석','2층 PT 프로그램 총괄']},
+  {grp:'trainer', no:'02', name:'연서휘', en:'YEON SEO-HWI', role:'리커버리 · 컨디셔닝 트레이너', roleEn:'RECOVERY & CONDITIONING', status:'open',
+   quote:'운동은 여기서 하시고, 풀어드리는 건 제 몫이에요.',
+   tags:['리커버리','컨디셔닝','바디케어'], info:{'프로필':'32세 · 남','주 공간':'3F 스트레칭룸 · PT ROOM','경력':'입사 3년 차 · 업계 8년 차','겸업':'한남동 프라이빗 샵 AFTER 운영','PT 상태':'신규 지명 가능'},
+   career:['오프 더 핏 리커버리 · 컨디셔닝 전문 PT (입사 3년 차)','업계 경력 8년','한남동 프라이빗 샵 AFTER 대표 · 5년 차','AFTER 서휘 시간대 1인 프라이빗 운영','대표 승인 하 겸업']},
+  {grp:'trainer', no:'03', name:'우이현', en:'WOO I-HYEON', role:'수영 PT 강사', roleEn:'SWIM PT INSTRUCTOR', status:'open', swim:true,
+   quote:'물 안에서는 제 말만 들으세요. 그게 제일 안전하니까.',
+   tags:['수영 PT','1:1 레슨','소규모 레슨'], info:{'프로필':'30세','주 공간':'B1 수영 강습 구역','근무':'레슨 지정 시간대','레슨 상태':'신청 가능'},
+   career:['오프 더 핏 수영 PT 강사','전직 수상 구조원']},
+  {grp:'trainer', no:'04', name:'한지오', en:'HAN JI-O', role:'트레이너', roleEn:'TRAINER', status:'open',
+   quote:'오늘 못 하면 내일 하면 돼요. 대신 내일은 진짜 해요.',
+   tags:['다이어트','식단 관리','입문자'], info:{'주 공간':'2F 트레이닝 존','근무':'14:00 – 23:00','PT 상태':'신규 지명 가능'},
+   career:['스포츠영양 코치 자격','생활스포츠지도사 2급','PT 경력 5년']},
+  {grp:'trainer', no:'05', name:'류건', en:'RYU GEON', role:'트레이너', roleEn:'TRAINER', status:'wait',
+   quote:'퇴근하고 오셨죠. 딱 한 시간만 저 믿으세요.',
+   tags:['직장인 루틴','체력 향상','소규모 클래스'], info:{'주 공간':'3F PT ROOM 3','근무':'16:00 – 24:00','PT 상태':'대기 접수 중'},
+   career:['생활스포츠지도사 2급','기능성 트레이닝 코치','PT 경력 4년']},
+
+  {grp:'desk', no:'06', name:'문서영', en:'MOON SEO-YOUNG', role:'운영실장', roleEn:'OPERATIONS MANAGER',
+   quote:'PT룸 예약 겹치면 저한테 오세요. 조율은 제가 합니다.',
+   tags:['운영 관리','PT룸 예약 조율','정기 회식 담당'], info:{'담당':'운영 전반 · 일정 · 예약 관리','근무':'평일 11:00 – 20:00','위치':'1F 데스크 후면'},
+   career:['호텔 피트니스 운영 매니저','오프 더 핏 오픈 멤버']},
+  {grp:'desk', no:'07', name:'이나은', en:'LEE NA-EUN', role:'데스크 매니저', roleEn:'DESK MANAGER',
+   quote:'오늘도 수고하셨어요. 셰이크 한 잔 하고 가세요.',
+   tags:['출입 · 회원 관리','단백질 바','오전 데스크'], info:{'담당':'회원 응대 · 입회 1차 상담','근무':'06:00 – 15:00','위치':'1F 리셉션'},
+   career:['서비스 경영 전공','오프 더 핏 2년 차']},
+  {grp:'desk', no:'08', name:'김준후', en:'KIM JUN-HU', role:'데스크 매니저', roleEn:'DESK MANAGER',
+   quote:'마감 10분 전입니다. 샤워는 천천히 하셔도 돼요.',
+   tags:['출입 · 회원 관리','커뮤니티 앱 관리','야간 데스크'], info:{'담당':'회원 응대 · 앱 신고 처리','근무':'15:00 – 24:00','위치':'1F 리셉션'},
+   career:['스포츠경영 전공','오프 더 핏 1년 차']},
+  {grp:'desk', no:'09', name:'이름 미정', en:'NAME TBD', mark:'?', role:'환경관리 매니저', roleEn:'FACILITY CARE MANAGER',
+   quote:'수건은 세탁함에, 비밀은 각자 마음에.',
+   tags:['시설 환경 관리','샤워 · 탈의실','수영장 위생'], info:{'담당':'전 층 위생 · 샤워실 · 탈의실 · 풀사이드 환경 관리','근무':'06:00 – 14:00','위치':'전 층 순회'},
+   career:['호텔 하우스키핑 15년','오프 더 핏 오픈 멤버']},
+];
+const GROUPS = [
+  {id:'all', label:'전체'},
+  {id:'ceo', label:'대표', en:'FOUNDER'},
+  {id:'trainer', label:'트레이너', en:'TRAINERS'},
+  {id:'desk', label:'데스크 · 운영관리', en:'DESK & OPERATIONS'},
+];
+const NOTICES = [
+  {tag:'공지', date:'2026.11.10', title:'11월 정기 회식으로 마지막 금요일 21시 이후 데스크 인원이 축소됩니다',
+   body:['매월 마지막 금요일은 전 직원이 참석하는 정기 회식이 진행됩니다.','11월 28일(금) 21:00 이후에는 데스크 인원이 1명으로 축소 운영되며, 입회 상담 및 PT 일정 변경 문의는 다음 날 순차적으로 안내드립니다.','시설 이용은 평소와 동일하게 24:00까지 가능합니다.']},
+  {tag:'수영', date:'2026.11.06', title:'B1 수영 1:1 · 소규모 레슨 지정 시간대 안내',
+   body:['B1 수영장의 1:1 · 소규모 레슨은 지정 시간대에만 운영됩니다.','레슨 시간에는 강습 구역이 분리 운영되며, 자유 수영 회원은 랩 풀 레인을 이용해 주세요.','레슨 신청은 1층 데스크 또는 담당 강사를 통해 가능합니다.']},
+  {tag:'시설', date:'2026.11.02', title:'3F 프라이빗 PT룸 예약 시스템 개편 안내',
+   body:['3층 PT룸 3실은 트레이너 공동 예약제로 운영됩니다.','인기 시간대 예약이 집중됨에 따라, 이번 달부터 예약 확정 전 운영실장의 시간 조율 단계가 추가됩니다.','회원님의 PT 일정은 담당 트레이너를 통해 안내됩니다.']},
+  {tag:'바', date:'2026.10.28', title:'1F 단백질 음료 바 시즌 메뉴 출시',
+   body:['1층 프로틴 드링크 바에 시즌 셰이크가 새로 출시되었습니다.','기존 웨이 · 아이솔레이트 · 플랜트 셰이크와 함께 저당 버전도 선택하실 수 있습니다.','운동 후 라운지에서 편하게 즐겨 주세요.']},
+];
+const ST = {open:['','OPEN'], wait:['wait','WAITLIST'], full:['full','FULL']};
+
+(function(){
+  const $=(q,c=document)=>c.querySelector(q), $$=(q,c=document)=>[...c.querySelectorAll(q)];
+  const finish=()=>{$('#loader').classList.add('done');document.body.classList.add('ready')};
+  window.addEventListener('load',()=>setTimeout(finish,1300));
+  setTimeout(finish,3200);
+
+  /* ── routing ── */
+  const PAGES=$$('.page').map(p=>p.dataset.page);
+  const nav=$('#nav');
+  function go(){
+    let id=(location.hash||'').slice(1); if(!PAGES.includes(id)) id='home';
+    $$('.page').forEach(p=>p.classList.toggle('on',p.dataset.page===id));
+    $$('#menu a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+    window.scrollTo(0,0);
+    document.title=(id==='home'?'':id.toUpperCase()+' | ')+'OFF THE FIT | 오프 더 핏';
+    onScroll();
+  }
+  addEventListener('hashchange',go);
+
+  const onScroll=()=>nav.classList.toggle('scrolled',scrollY>60);
+  addEventListener('scroll',onScroll,{passive:true});
+
+  /* mobile nav */
+  const mnav=$('#mnav');
+  $('#burger').onclick=()=>mnav.classList.add('on');
+  $('#mx').onclick=()=>mnav.classList.remove('on');
+  $$('a',mnav).forEach(a=>a.addEventListener('click',()=>mnav.classList.remove('on')));
+
+  /* glow */
+  const glow=$('#glow');
+  addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true});
+
+  /* reveal + counters */
+  const count=el=>{
+    if(el.dataset.done)return;el.dataset.done=1;
+    const t=+el.dataset.count,sup=el.dataset.sup?`<sup>${el.dataset.sup}</sup>`:'';
+    const st=performance.now(),d=1800;
+    const step=n=>{const p=Math.min((n-st)/d,1);el.innerHTML=Math.round(t*(1-Math.pow(1-p,4)))+sup;if(p<1)requestAnimationFrame(step)};
+    requestAnimationFrame(step);
+  };
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');$$('[data-count]',e.target).forEach(count);io.unobserve(e.target)}}),{threshold:.12});
+  const watch=()=>$$('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+  /* floors */
+  const tabs=$$('.ftab'),panels=$$('.fpanel');
+  const setFloor=f=>{tabs.forEach(x=>x.classList.toggle('on',x.dataset.f==f));panels.forEach(p=>p.classList.toggle('on',p.dataset.p==f))};
+  tabs.forEach(t=>t.addEventListener('click',()=>setFloor(t.dataset.f)));
+  $$('.qcard').forEach(q=>q.addEventListener('click',()=>setFloor(q.dataset.floor)));
+
+  /* rules */
+  $$('.rule-h').forEach(h=>h.addEventListener('click',()=>{
+    const r=h.parentElement,open=r.classList.contains('open');
+    $$('.rule').forEach(x=>x.classList.remove('open'));
+    if(!open)r.classList.add('open');
+  }));
+
+  /* ── staff roster ── */
+  const mono=(s,big)=>`<div class="mono"><span class="no">NO. ${s.no}</span>${s.status?`<span class="st ${ST[s.status][0]}">${ST[s.status][1]}</span>`:''}<i class="ring"></i><b>${s.mark||s.name[0]}</b></div>`;
+  const roster=$('#roster'), filters=$('#filters');
+  filters.innerHTML=GROUPS.map((g,i)=>`<button data-g="${g.id}" class="${i?'':'on'}">${g.label}<em>${g.id==='all'?STAFF.length:STAFF.filter(s=>s.grp===g.id).length}</em></button>`).join('');
+  let html='';
+  GROUPS.slice(1).forEach(g=>{
+    const list=STAFF.filter(s=>s.grp===g.id); if(!list.length)return;
+    html+=`<div class="grp" data-g="${g.id}">`;
+    if(g.id==='ceo'){
+      const s=list[0];
+      html+=`<div class="ceo reveal" data-i="${STAFF.indexOf(s)}">${mono(s)}<div class="ceo-in"><span class="role">${s.roleEn} · ${s.role}</span><h3>${s.name}</h3><span class="en">${s.en}</span><blockquote>${s.quote}</blockquote></div></div>`;
+    }else{
+      html+=`<div class="grp-h">${g.en}<small>${g.label} · ${list.length}명</small></div><div class="staff-grid">`;
+      list.forEach((s,k)=>{html+=`<div class="scard reveal d${k%4}" data-i="${STAFF.indexOf(s)}">${mono(s)}<div class="scard-in"><span class="role">${s.roleEn}</span><h4>${s.name}</h4><span class="en">${s.en}</span><div class="tags">${s.tags.map(t=>`<span>${t}</span>`).join('')}</div><div class="view"><span>VIEW PROFILE</span><b>→</b></div></div></div>`});
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+  });
+  roster.innerHTML=html;
+  $$('button',filters).forEach(b=>b.addEventListener('click',()=>{
+    $$('button',filters).forEach(x=>x.classList.toggle('on',x===b));
+    $$('.grp',roster).forEach(g=>g.classList.toggle('hide',b.dataset.g!=='all'&&g.dataset.g!==b.dataset.g));
+  }));
+
+  /* modal */
+  const modal=$('#modal'),mbox=$('#mbox');
+  const openProfile=i=>{
+    const s=STAFF[i], canPick=(s.grp==='trainer');
+    const btn=canPick?(s.status==='full'?`<span class="mbtn dis">현재 정원 마감</span>`:`<a class="mbtn" href="#contact" data-pick="${i}">${s.swim?'이 강사에게 레슨 상담 신청':'이 트레이너로 상담 신청'} →</a>`):'';
+    mbox.innerHTML=`<button class="mclose" aria-label="닫기">✕</button>${mono(s)}<div class="mbody"><span class="role">${s.roleEn} · ${s.role}</span><h3>${s.name}</h3><span class="en">${s.en}</span><blockquote>${s.quote}</blockquote><div class="mrows">${Object.entries(s.info).map(([k,v])=>`<div class="mrow"><span>${k}</span><div>${v}</div></div>`).join('')}<div class="mrow"><span>전문 분야</span><div class="tags" style="margin:0">${s.tags.map(t=>`<span>${t}</span>`).join('')}</div></div><div class="mrow"><span>이력</span><ul>${s.career.map(c=>`<li>${c}</li>`).join('')}</ul></div></div>${btn}</div>`;
+    mbox.classList.remove('notice-box');
+    modal.classList.add('on');
+    $('.mclose',mbox).onclick=()=>modal.classList.remove('on');
+    const pk=$('[data-pick]',mbox);
+    if(pk)pk.addEventListener('click',()=>{modal.classList.remove('on');$('#tr').value=s.name;$$('#pick input').forEach(x=>x.checked=(x.value===(s.swim?'s':'pt')))});
+  };
+  roster.addEventListener('click',e=>{const c=e.target.closest('[data-i]');if(c)openProfile(+c.dataset.i)});
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('on')});
+  addEventListener('keydown',e=>{if(e.key==='Escape'){modal.classList.remove('on');$('#lb').classList.remove('on')}});
+
+  /* notices */
+  const nl=$('#notice');
+  nl.innerHTML=NOTICES.map((n,i)=>`<li data-n="${i}" tabindex="0" role="button"><i>${n.tag}</i><span>${n.title}</span><em>${n.date.slice(5)}</em></li>`).join('');
+  const openNotice=i=>{
+    const n=NOTICES[i];
+    mbox.innerHTML=`<button class="mclose" aria-label="닫기">✕</button><div class="nbody"><div class="ntop"><i>${n.tag}</i><span>NOTICE · ${String(i+1).padStart(2,'0')}</span><em>${n.date}</em></div><h3>${n.title}</h3>${n.body.map(t=>`<p>${t}</p>`).join('')}<div class="nfoot"><span>OFF THE FIT 운영팀</span><div class="nnav">${i>0?`<button data-go="${i-1}">← 이전 공지</button>`:''}${i<NOTICES.length-1?`<button data-go="${i+1}">다음 공지 →</button>`:''}</div></div></div>`;
+    mbox.classList.add('notice-box');
+    modal.classList.add('on');
+    $('.mclose',mbox).onclick=()=>modal.classList.remove('on');
+    $$('[data-go]',mbox).forEach(b=>b.onclick=()=>openNotice(+b.dataset.go));
+  };
+  nl.addEventListener('click',e=>{const li=e.target.closest('[data-n]');if(li)openNotice(+li.dataset.n)});
+  nl.addEventListener('keydown',e=>{const li=e.target.closest('[data-n]');if(li&&e.key==='Enter')openNotice(+li.dataset.n)});
+
+  /* trainer select in form */
+  $('#tr').innerHTML+=STAFF.filter(s=>s.grp==='trainer').map(s=>`<option value="${s.name}">${s.name} · ${s.role}</option>`).join('');
+
+  /* community feed */
+  const posts=[
+    ['🏋️','익명의 데드리프터','운동·식단','2F 프리웨이트 존 저녁 8시 이후는 진짜 전쟁이에요. 7시 전에 오시는 거 추천드립니다.','♡ 42','💬 18',0,'3분 전'],
+    ['💌','논현동 직장인','연애상담','PT 끝나고 트레이너님이 “오늘 컨디션 좋아 보이시네요” 하셨는데… 이거 그냥 영업 멘트죠? 그렇다고 해주세요.','♡ 211','💬 96',1,'12분 전'],
+    ['👀','B1 자유수영러','목격담','어제 밤 11시 수영장에서 직원 두 분이 같이 나오시던데… 직원 간 연애 금지 아니었나요? (아님 말고)','♡ 387','💬 154',1,'28분 전'],
+    ['⭐','재등록 3회차','트레이너','제 담당 쌤 설명이 진짜 정직해요. 안 되는 건 안 된다고 하심. 실적 1위인 이유가 있음.','♡ 64','💬 21',0,'41분 전'],
+    ['🥤','프로틴바 단골','운동·식단','1층 단백질 바 시즌 셰이크 바뀌었어요! 저당 버전도 생김 🙌','♡ 58','💬 9',0,'1시간 전'],
+    ['🔒','3F 예약 피해자','목격담','3층 PT룸 화요일 저녁 타임 또 두 트레이너가 신경전 중이라는 소문이…','♡ 129','💬 47',0,'2시간 전'],
+    ['💭','익명','연애상담','담당 바꾸고 싶은데 3자 동의라… 기존 쌤이 거절하면 어쩌죠. 아니 왜 거절하는데요.','♡ 276','💬 133',1,'3시간 전'],
+  ];
+  const ph=posts.map(p=>`<div class="post${p[6]?' hot':''}"><div class="post-h"><span class="av">${p[0]}</span><b>${p[1]}</b><em>${p[7]}</em></div><span class="cat">#${p[2]}</span><p>${p[3]}</p><div class="meta"><span>${p[4]}</span><span>${p[5]}</span></div></div>`).join('');
+  $('#feed').innerHTML=ph+ph;
+
+  /* open now */
+  const kst=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Seoul'})),h=kst.getHours();
+  $$('[data-now]').forEach(n=>{
+    if(h>=6)n.querySelector('span').textContent='OPEN NOW · KST '+String(h).padStart(2,'0')+':'+String(kst.getMinutes()).padStart(2,'0');
+    else{n.classList.add('closed');n.querySelector('span').textContent='CLOSED · OPENS 06:00'}
+  });
+
+  /* form */
+  const toast=$('#toast');
+  $('#form').addEventListener('submit',e=>{e.preventDefault();toast.classList.add('show');e.target.reset();setTimeout(()=>toast.classList.remove('show'),3600)});
+
+  /* lightbox */
+  const lb=$('#lb'),lbi=$('img',lb);
+  $$('.gallery figure').forEach(f=>f.addEventListener('click',()=>{const i=$('img',f);lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('on')}));
+  lb.addEventListener('click',()=>lb.classList.remove('on'));
+
+  /* hero parallax */
+  const hb=$('.hero-bg');
+  addEventListener('scroll',()=>{if(scrollY<innerHeight)hb.style.translate=`0 ${scrollY*.3}px`},{passive:true});
+
+  go(); watch();
+  addEventListener('hashchange',()=>setTimeout(watch,30));
+})();
+</script>
+
+</body>
+</html>
